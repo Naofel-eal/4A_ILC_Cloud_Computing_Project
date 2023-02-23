@@ -1,6 +1,9 @@
 from flask import Flask
+import redis
 
 app = Flask(__name__)
+bulasDB = redis.Redis(host="localhost", port=6379, db=0)
+usersDB = redis.Redis(host="localhsot", port=6379, db=1)
 
 @app.route('/')
 def default():
@@ -33,7 +36,6 @@ def allHashtags():
 @app.route('/register', methods=['POST'])
 def register():
     return '''<h1>REGISTER</h1>'''
-
 
 @app.route('/login', methods=['POST'])
 def login():
