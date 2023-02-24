@@ -9,6 +9,7 @@ class Hashtag:
         result = ""
         for bula in self.bulasId:
             result += str(bula) + ','
+        result = result[:-1]
         return result
     
     def getName(self) -> str:

@@ -1,25 +1,28 @@
-from flask import Flask
-import redis
+from flask import Flask, request
+from backend.utils.utils import *
 
 app = Flask(__name__)
-bulasDB = redis.Redis(host="localhost", port=6379, db=0)
-usersDB = redis.Redis(host="localhsot", port=6379, db=1)
 
 @app.route('/')
 def default():
 	return '''<h1>Bula API v0.0.0</h1>'''
 
 @app.route('/all-bulas', methods=['GET'])
-def allBulas():
-    return '''<h1>ALL BULAS</h1>'''
+def allBulas() -> str:
+    return getAllBulas()
 
 @app.route('/user-bulas', methods=['GET'])
 def userBulas():
-    return '''<h1>USER-BULAS</h1>'''
+    userId = request.args.get("userId")
+    userBulasIdStr = usersDB.get('u-' + userId)
+    userBulasIdArr = userBulasIdStr.split(',')
+    return userBulasIdArr
 
 @app.route('/bula', methods=['POST'])
 def bula():
-    return '''<h1>BULA</h1>'''
+    userId = request.args.get("userId")
+    bulaText = request.args.get("text")
+    createBula(userId=userId, bulaText=bulaText)
 
 @app.route('/rebula', methods=['POST'])
 def rebula():
