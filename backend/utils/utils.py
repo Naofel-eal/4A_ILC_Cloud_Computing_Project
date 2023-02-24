@@ -44,3 +44,8 @@ def checkHashtag(bulaText: str, bulaId: str):
             hashtagDB.set('h-' + hashtag, bulasIdListStr)
         else:
             hashtagDB.set('h-' + hashtag, bulaId)
+            
+def rebula(userId: str, bulaTimestamp: str) -> None:
+    bulasListStr = getBuladIdStringOfUser(userId=userId)
+    bulasListStr += ',' + bulaTimestamp
+    usersDB.set('u-' + userId, bulasListStr)

@@ -8,40 +8,40 @@ def default():
 	return '''<h1>Bula API v0.0.0</h1>'''
 
 @app.route('/all-bulas', methods=['GET'])
-def allBulas() -> str:
+def allBulasRoute() -> str:
     return getAllBulas()
 
 @app.route('/user-bulas', methods=['GET'])
-def userBulas():
+def userBulasRoute():
     userId = request.args.get("userId")
-    userBulasIdStr = usersDB.get('u-' + userId)
-    userBulasIdArr = userBulasIdStr.split(',')
-    return userBulasIdArr
+    return getBuladIdStringOfUser(userId=userId)
 
 @app.route('/bula', methods=['POST'])
-def bula():
+def bulaRoute():
     userId = request.args.get("userId")
     bulaText = request.args.get("text")
     createBula(userId=userId, bulaText=bulaText)
 
 @app.route('/rebula', methods=['POST'])
-def rebula():
-    return '''<h1>REBULA</h1>'''
+def rebulaRoute():
+    userId = request.args.get("userId")
+    bulaId = request.args.get("userId")
+    rebula(userId=userId, bulaTimestamp=bulaId)
 
 @app.route('/hashtag', methods=['GET'])
-def hashtag():
+def hashtagRoute():
     return '''<h1>HASHTAG</h1>'''
 
 @app.route('/all-hashtags', methods=['GET'])
-def allHashtags():
+def allHashtagsRoute():
     return '''<h1>ALL HASHTAGS</h1>'''
 
 @app.route('/register', methods=['POST'])
-def register():
+def registerRoute():
     return '''<h1>REGISTER</h1>'''
 
 @app.route('/login', methods=['POST'])
-def login():
+def loginRoute():
     return '''<h1>LOGIN</h1>'''
 
 if __name__ == '__main__':
