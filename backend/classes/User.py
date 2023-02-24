@@ -13,6 +13,7 @@ class User:
         result = ""
         for bulaId in self.bulasId:
             result += str(bulaId) + ','
+        result = result[:-1]
         return result
     
     def getId(self) -> int:
