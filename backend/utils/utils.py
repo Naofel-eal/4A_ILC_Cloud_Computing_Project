@@ -1,19 +1,25 @@
 import redis
 from datetime import datetime
 
-bulasDB = redis.Redis(host="localhost", port=6379, db=0)
-usersDB = redis.Redis(host="localhsot", port=6379, db=1)
-hashtagDB = redis.Redis(host="localhsot", port=6379, db=2)
+bulasDB = redis.Redis(host="127.0.0.1", port=6379, db=0, decode_responses=True)
+usersDB = redis.Redis(host="127.0.0.1", port=6379, db=1, decode_responses=True)
+hashtagDB = redis.Redis(host="127.0.0.1", port=6379, db=2, decode_responses=True)
+bulasDB.flushdb()
+
+usersDB.set("u-8", "")
 
 def getAllBulas()-> str:
     result: str = ""
     for bula in bulasDB.scan_iter('*'):
-        result += bula + ','
+        result += str(bula) + ','
     result = result[:-1]
     return result
 
 def getBuladIdStringOfUser(userId: str) -> str:
-    userBulasIdStr = usersDB.get('u-' + userId)
+    userBulasIdStr: str = str(usersDB.get('u-' + userId))
+    if userBulasIdStr == None:
+        userBulasIdStr = ''
+    print(type(userBulasIdStr), userBulasIdStr)
     return userBulasIdStr
 
 def getBulasIdArrayOfUser(userId: str):
@@ -21,18 +27,21 @@ def getBulasIdArrayOfUser(userId: str):
     userBulasIdArray = userBulasIdStr.split(',')
     return userBulasIdArray
 
-def addBulaIdToUser(userId: str, bulaId: str) -> None:
-    userBulasIdStr = getBuladIdStringOfUser(userId=userId)
-    userBulasIdStr += ',' + bulaId 
-    usersDB.set('u-' + userId, userBulasIdStr)
-    
-def createBula(userId: str, bulaText: str) -> None:
-    timestamp: str = datetime.now()
+def createBula(userId: str, bulaText: str):
+    timestamp: str = str(datetime.now())
     bulaValue = "{author: " + userId + "text: " + bulaText + '}' 
     bulasDB.set(timestamp, bulaValue)
     addBulaIdToUser(userId=userId, bulaId=timestamp)
     checkHashtag(bulaText=bulaText, bulaId=timestamp)
-    
+
+def addBulaIdToUser(userId: str, bulaId: str) -> None:
+    userBulasIdStr = getBuladIdStringOfUser(userId=userId)
+    if userBulasIdStr != '':
+        userBulasIdStr += ',' + bulaId 
+    else:
+        userBulasIdStr = bulaId
+    usersDB.set('u-' + userId, userBulasIdStr)
+        
 def checkHashtag(bulaText: str, bulaId: str):
     if '#' in bulaText:
         hashtagIndex = bulaText.index('#')
