@@ -1,11 +1,11 @@
 from flask import Flask, request
-from backend.utils.utils import *
+from utils.utils import *
 
 app = Flask(__name__)
 
 @app.route('/')
 def default():
-	return '''<h1>Bula API v0.0.0</h1>'''
+    return '''<h1>Bula API v0.0.0</h1>'''
 
 @app.route('/all-bulas', methods=['GET'])
 def allBulasRoute() -> str:
@@ -21,6 +21,7 @@ def bulaRoute():
     userId = request.args.get("userId")
     bulaText = request.args.get("text")
     createBula(userId=userId, bulaText=bulaText)
+    return ''
 
 @app.route('/rebula', methods=['POST'])
 def rebulaRoute():
