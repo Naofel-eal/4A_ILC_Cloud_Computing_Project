@@ -10,41 +10,58 @@ def default():
 
 @app.route('/all-bulas', methods=['GET'])
 def allBulasRoute() -> str:
-    return getAllBulas()
+    if request.method == 'GET':
+        return getAllBulas()
+    return "invalid request"
 
 @app.route('/user-bulas', methods=['GET'])
 def userBulasRoute():
-    userId = request.args.get("userId")
-    return getBuladIdStringOfUser(userId=userId)
+    if request.method == 'GET':
+        userId = request.args.get("userId")
+        return getBulasIdStringOfUser(userId=userId)
+    return "invalid request"
 
 @app.route('/bula', methods=['POST'])
 def bulaRoute():
-    userId = request.args.get("userId")
-    bulaText = request.args.get("text")
-    createBula(userId=userId, bulaText=bulaText)
-    return ''
+    if request.method == 'POST':
+        userId = request.args.get("userId")
+        bulaText = request.args.get("text")
+        createBula(userId=userId, bulaText=bulaText)
+        return ''
+    return "invalid request"
 
 @app.route('/rebula', methods=['POST'])
 def rebulaRoute():
-    userId = request.args.get("userId")
-    bulaId = request.args.get("userId")
-    rebula(userId=userId, bulaTimestamp=bulaId)
+    if request.method == 'POST':
+        userId = request.args.get("userId")
+        bulaId = request.args.get("userId")
+        rebula(userId=userId, bulaTimestamp=bulaId)
+    return "invalid request"
 
 @app.route('/hashtag', methods=['GET'])
 def hashtagRoute():
-    return '''<h1>HASHTAG</h1>'''
+    if request.method == 'GET':
+        hashtagId = request.args.get("hashtagId")
+        return getBulasIdStringOfHashtag(hashtagId=hashtagId)
+    return "invalid request"
 
 @app.route('/all-hashtags', methods=['GET'])
 def allHashtagsRoute():
-    return '''<h1>ALL HASHTAGS</h1>'''
+    if request.method == 'GET':
+        return getAllHashtags()
+    return "invalid request"
 
 @app.route('/register', methods=['POST'])
 def registerRoute():
-    return '''<h1>REGISTER</h1>'''
+    if request.method == 'POST':
+        return '''<h1>REGISTER</h1>'''
+    return "invalid request"
 
 @app.route('/login', methods=['POST'])
 def loginRoute():
-    return '''<h1>LOGIN</h1>'''
+    if request.method == 'POST':
+        return '''<h1>LOGIN</h1>'''
+    return "invalid request"
 
 if __name__ == '__main__':
     if len(sys.argv) > 1 :
