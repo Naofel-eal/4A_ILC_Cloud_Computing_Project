@@ -79,7 +79,7 @@ def getBulasOfHashtag(hashtag: str) -> str:
 
 def register(username: str, password: str) -> str:
     if usersDB.exists(username):
-        return returnError("username already exists")
+        return returnError("username already exists.")
     else:
         user: dict = {
             'password': password,
