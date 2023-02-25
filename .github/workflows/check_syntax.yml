@@ -1,0 +1,11 @@
+name: Check syntax
+
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-python@v4
+    - run: pip install Flask
+    - run: python backend/main.py check_syntax
