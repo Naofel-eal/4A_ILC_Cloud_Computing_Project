@@ -67,8 +67,24 @@ def getAllHashtags()-> str:
     result = result[:-1]
     return result
 
-def getBulasIdStringOfHashtag(hashtagId: str) -> str:
-    hashtagBulasIdStr: str = str(hashtagDB.get('h-' + hashtagId))
+def getBulasIdStringOfHashtag(hashtag: str) -> str:
+    hashtagBulasIdStr: str = str(hashtagDB.get('h-'+hashtag))
     if hashtagBulasIdStr == None:
         hashtagBulasIdStr = ''
     return hashtagBulasIdStr
+
+def register(username: str, password: str) -> str:
+    if usersDB.exists('u-' + username):
+        return "username already exists"
+    else:
+        usersDB.set('u-' + username, password)
+        return "success"
+    
+def login(username: str, password: str) -> str:
+    if usersDB.exists('u-' + username):
+        if usersDB.get('u-' + username) == password:
+            return "success"
+        else:
+            return "wrong password"
+    else:
+        return "username doesn't exist"
