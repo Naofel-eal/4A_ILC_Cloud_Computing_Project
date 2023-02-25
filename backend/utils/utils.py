@@ -1,90 +1,102 @@
 import redis
 import uuid
+import json
 from datetime import datetime
 
 bulasDB = redis.Redis(host="127.0.0.1", port=6379, db=0, decode_responses=True)
 usersDB = redis.Redis(host="127.0.0.1", port=6379, db=1, decode_responses=True)
 hashtagDB = redis.Redis(host="127.0.0.1", port=6379, db=2, decode_responses=True)
 bulasDB.flushdb()
+usersDB.flushdb()
+hashtagDB.flushdb()
 
-usersDB.set("u-"+uuid.uuid1(), "")
-
-def getAllBulas()-> str:
-    result: str = ""
+def getAllBulas()-> dict:
+    bulasDictionary: dict = {"bulas" : []}
     for bula in bulasDB.scan_iter('*'):
-        result += str(bula) + ','
-    result = result[:-1]
-    return result
+        bulasDictionary['bulas'] += bula
+    return bulasDictionary
 
-def getBulasIdStringOfUser(userId: str) -> str:
-    userBulasIdStr: str = str(usersDB.get('u-' + userId))
-    if userBulasIdStr == None:
-        userBulasIdStr = ''
-    print(type(userBulasIdStr), userBulasIdStr)
-    return userBulasIdStr
+def getBulasIdOfUser(userId: str) -> json:
+    if(usersDB.exists(userId)):
+        user: json = json.load(usersDB.get(userId))
+        del user['password']
+        return user
+    return returnError("userId doesn't exist.")
 
-def getBulasIdArrayOfUser(userId: str):
-    userBulasIdStr = getBulasIdStringOfUser(userId=userId)
-    userBulasIdArray = userBulasIdStr.split(',')
-    return userBulasIdArray
-
-def createBula(userId: str, bulaText: str):
-    timestamp: str = str(datetime.now())
-    bulaValue = "{author: " + userId + "text: " + bulaText + "meows: " + 0 + "rebulas: " + 0 + '}' 
-    bulasDB.set(timestamp, bulaValue)
-    addBulaIdToUser(userId=userId, bulaId=timestamp)
-    checkHashtag(bulaText=bulaText, bulaId=timestamp)
+def createBula(userId: str, bulaText: str) -> None:
+    bulaId = str(uuid.uuid1())
+    bula = {
+        'date': str(datetime.now()),
+        'author': userId,
+        'text': bulaText,
+        'meows': [],
+        'rebulas': []
+    }
+    bulasDB.set(bulaId, json.dumps(bula))
+    addBulaIdToUser(userId=userId, bulaId=bulaId)
+    findHashtags(bulaText=bulaText, bulaId=bulaId)
 
 def addBulaIdToUser(userId: str, bulaId: str) -> None:
-    userBulasIdStr = getBulasIdStringOfUser(userId=userId)
-    if userBulasIdStr != '':
-        userBulasIdStr += ',' + bulaId 
-    else:
-        userBulasIdStr = bulaId
-    usersDB.set('u-' + userId, userBulasIdStr)
+    user: json = json.load(usersDB.get(userId))
+    user['bulas'] += bulaId
+    usersDB.set(userId, json.dumps(user))
         
-def checkHashtag(bulaText: str, bulaId: str):
-    if '#' in bulaText:
-        hashtagIndex = bulaText.index('#')
-        hashtag = bulaText[hashtagIndex:].split(' ')[0][1:]
-    
-        if hashtagDB.exists('h-' + hashtag):
-            bulasIdListStr = hashtagDB.get('h-' + hashtag)
-            bulasIdListStr += ',' + bulaId
-            hashtagDB.set('h-' + hashtag, bulasIdListStr)
+def findHashtags(bulaText: str, bulaId: str) -> None:
+    words = bulaText.split()
+    hashtags = []
+    for word in words:
+        if word.startswith("#"):
+            hashtags.append(word)
+    for hashtag in hashtags:
+        if(hashtagDB.exists(hashtag)):
+            hashtagJson: json = json.load(hashtagDB.get(hashtag))
+            hashtagJson['bulas'] += bulaId
+            hashtagDB.set(hashtag, json.dumps(hashtagJson))
         else:
-            hashtagDB.set('h-' + hashtag, bulaId)
+            hashtagDB.set(hashtag, json.dumps({'bulas': [bulaId]}))        
             
-def rebula(userId: str, bulaTimestamp: str) -> None:
-    bulasListStr = getBulasIdStringOfUser(userId=userId)
-    bulasListStr += ',' + bulaTimestamp
-    usersDB.set('u-' + userId, bulasListStr)
+def rebula(userId: str, bulaId: str) -> None:
+    user: json = json.load(usersDB.get(userId))
+    user['bulas'] += bulaId
+    usersDB.set(userId, json.dumps(user))
     
-def getAllHashtags()-> str:
-    result: str = ""
+    bula: json = json.load(bulasDB.get(bulaId))
+    bula['rebulas'] += userId
+    bulasDB.set(userId, json.dumps(bula))  
+    
+    
+def getAllHashtags()-> dict:
+    hashtagsDictionnary: dict = {"hashtags" : []}
     for hashtag in hashtagDB.scan_iter('*'):
-        result += str(hashtag) + ','
-    result = result[:-1]
-    return result
+        hashtagsDictionnary['hashtags'] += hashtag
+    return hashtagsDictionnary
 
-def getBulasIdStringOfHashtag(hashtag: str) -> str:
-    hashtagBulasIdStr: str = str(hashtagDB.get('h-'+hashtag))
-    if hashtagBulasIdStr == None:
-        hashtagBulasIdStr = ''
-    return hashtagBulasIdStr
+def getBulasOfHashtag(hashtag: str) -> str:
+    if(hashtagDB.exists(hashtag)):
+        return json.load(hashtagDB.get(hashtag))
+    else:
+        return returnError("hashtag doesn't exist.")
 
 def register(username: str, password: str) -> str:
-    if usersDB.exists('u-' + username):
-        return "username already exists"
+    if usersDB.exists(username):
+        return returnError("username already exists")
     else:
-        usersDB.set('u-' + username, password)
+        user: dict = {
+            'password': password,
+            'bulas': []
+        }
+        usersDB.set(username, json.dumps(user))
         return "success"
     
 def login(username: str, password: str) -> str:
-    if usersDB.exists('u-' + username):
-        if usersDB.get('u-' + username) == password:
+    if usersDB.exists(username):
+        user: json = json.loads(usersDB.get(username))
+        if user['password'] == password:
             return "success"
         else:
-            return "wrong password"
+            return returnError("wrong password")
     else:
-        return "username doesn't exist"
+        return returnError("username doesn't exist")
+    
+def returnError(message: str) -> json:
+    return json.dumps({'message': message})

@@ -17,7 +17,7 @@ def allBulasRoute() -> str:
 def userBulasRoute():
     if request.method == 'GET':
         userId = request.args.get("userId")
-        return getBulasIdStringOfUser(userId=userId)
+        return getBulasIdOfUser(userId=userId)
     return "invalid request"
 
 @app.route('/bula', methods=['POST'])
@@ -34,14 +34,14 @@ def rebulaRoute():
     if request.method == 'POST':
         userId = request.args.get("userId")
         bulaId = request.args.get("userId")
-        rebula(userId=userId, bulaTimestamp=bulaId)
+        rebula(userId=userId, bulaId=bulaId)
     return "invalid request"
 
 @app.route('/hashtag', methods=['GET'])
 def hashtagRoute():
     if request.method == 'GET':
         hashtag = request.args.get("hashtagId")
-        return getBulasIdStringOfHashtag(hashtag=hashtag)
+        return getBulasOfHashtag(hashtag=hashtag)
     return "invalid request"
 
 @app.route('/all-hashtags', methods=['GET'])
