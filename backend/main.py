@@ -1,6 +1,5 @@
 from flask import Flask, request
 from utils.utils import *
-import sys
 
 app = Flask(__name__)
 
@@ -41,8 +40,8 @@ def rebulaRoute():
 @app.route('/hashtag', methods=['GET'])
 def hashtagRoute():
     if request.method == 'GET':
-        hashtagId = request.args.get("hashtagId")
-        return getBulasIdStringOfHashtag(hashtagId=hashtagId)
+        hashtag = request.args.get("hashtagId")
+        return getBulasIdStringOfHashtag(hashtag=hashtag)
     return "invalid request"
 
 @app.route('/all-hashtags', methods=['GET'])
@@ -54,21 +53,18 @@ def allHashtagsRoute():
 @app.route('/register', methods=['POST'])
 def registerRoute():
     if request.method == 'POST':
-        return '''<h1>REGISTER</h1>'''
+        username = request.form['username']
+        password = request.form['password']
+        return register(username=username, password=password)
     return "invalid request"
 
 @app.route('/login', methods=['POST'])
 def loginRoute():
     if request.method == 'POST':
-        return '''<h1>LOGIN</h1>'''
+        username = request.form['username']
+        password = request.form['password']
+        return login(username=username, password=password)
     return "invalid request"
 
 if __name__ == '__main__':
-    if len(sys.argv) > 1 :
-        if sys.argv[1] == "check_syntax":
-            print("Build [ OK ]")
-            exit(0)
-        else:
-            print("Passed argument not supported ! Supported argument : check_syntax")
-            exit(1)
     app.run(debug=True)
