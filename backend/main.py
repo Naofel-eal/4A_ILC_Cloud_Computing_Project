@@ -5,7 +5,10 @@ app = Flask(__name__)
 
 @app.route('/')
 def default():
-    return '''<h1>Bula API v0.0.0</h1>'''
+    if request.method == 'GET':
+        return '''<h1>Bula API v0.0.0</h1>'''
+    return "invalid request"
+    
 
 @app.route('/all-bulas', methods=['GET'])
 def allBulasRoute() -> str:
@@ -26,15 +29,16 @@ def bulaRoute():
         userId = request.args.get("userId")
         bulaText = request.args.get("text")
         createBula(userId=userId, bulaText=bulaText)
-        return ''
+        return 'success'
     return "invalid request"
 
 @app.route('/rebula', methods=['POST'])
 def rebulaRoute():
     if request.method == 'POST':
         userId = request.args.get("userId")
-        bulaId = request.args.get("userId")
+        bulaId = request.args.get("bulaId")
         rebula(userId=userId, bulaId=bulaId)
+        return 'success'
     return "invalid request"
 
 @app.route('/hashtag', methods=['GET'])

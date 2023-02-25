@@ -13,12 +13,12 @@ hashtagDB.flushdb()
 def getAllBulas()-> dict:
     bulasDictionary: dict = {"bulas" : []}
     for bula in bulasDB.scan_iter('*'):
-        bulasDictionary['bulas'] += bula
+        bulasDictionary['bulas'].append(bula)
     return bulasDictionary
 
 def getBulasIdOfUser(userId: str) -> json:
     if(usersDB.exists(userId)):
-        user: json = json.load(usersDB.get(userId))
+        user: json = json.loads(usersDB.get(userId))
         del user['password']
         return user
     return returnError("userId doesn't exist.")
@@ -37,8 +37,8 @@ def createBula(userId: str, bulaText: str) -> None:
     findHashtags(bulaText=bulaText, bulaId=bulaId)
 
 def addBulaIdToUser(userId: str, bulaId: str) -> None:
-    user: json = json.load(usersDB.get(userId))
-    user['bulas'] += bulaId
+    user: json = json.loads(usersDB.get(userId))
+    user['bulas'].append(bulaId)
     usersDB.set(userId, json.dumps(user))
         
 def findHashtags(bulaText: str, bulaId: str) -> None:
@@ -49,31 +49,31 @@ def findHashtags(bulaText: str, bulaId: str) -> None:
             hashtags.append(word)
     for hashtag in hashtags:
         if(hashtagDB.exists(hashtag)):
-            hashtagJson: json = json.load(hashtagDB.get(hashtag))
-            hashtagJson['bulas'] += bulaId
+            hashtagJson: json = json.loads(hashtagDB.get(hashtag))
+            hashtagJson['bulas'].append(bulaId)
             hashtagDB.set(hashtag, json.dumps(hashtagJson))
         else:
             hashtagDB.set(hashtag, json.dumps({'bulas': [bulaId]}))        
             
 def rebula(userId: str, bulaId: str) -> None:
-    user: json = json.load(usersDB.get(userId))
-    user['bulas'] += bulaId
+    user: json = json.loads(usersDB.get(userId))
+    user['bulas'].append(bulaId)
     usersDB.set(userId, json.dumps(user))
     
-    bula: json = json.load(bulasDB.get(bulaId))
-    bula['rebulas'] += userId
+    bula: json = json.loads(bulasDB.get(bulaId))
+    bula['rebulas'].append(userId)
     bulasDB.set(userId, json.dumps(bula))  
     
     
 def getAllHashtags()-> dict:
     hashtagsDictionnary: dict = {"hashtags" : []}
     for hashtag in hashtagDB.scan_iter('*'):
-        hashtagsDictionnary['hashtags'] += hashtag
+        hashtagsDictionnary['hashtags'].append(hashtag)
     return hashtagsDictionnary
 
 def getBulasOfHashtag(hashtag: str) -> str:
     if(hashtagDB.exists(hashtag)):
-        return json.load(hashtagDB.get(hashtag))
+        return json.loads(hashtagDB.get(hashtag))
     else:
         return returnError("hashtag doesn't exist.")
 
