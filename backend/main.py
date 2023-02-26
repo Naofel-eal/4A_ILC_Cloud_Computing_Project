@@ -1,5 +1,7 @@
 from flask import Flask, request
-from utils.utils import *
+from backend.services.user_service import UserService
+from backend.services.bula_service import BulaService
+from backend.services.redis_service import RedisService
 
 app = Flask(__name__)
 
@@ -13,7 +15,7 @@ def default():
 @app.route('/all-bulas', methods=['GET'])
 def allBulasRoute() -> str:
     if request.method == 'GET':
-        return getAllBulas()
+        return BulaService.getAllBulas()
     return "invalid request"
 
 
@@ -21,7 +23,7 @@ def allBulasRoute() -> str:
 def userBulasRoute():
     if request.method == 'GET':
         userId = request.args.get("userId")
-        return getBulasIdOfUser(userId=userId)
+        return BulaService.getBulasIdOfUser(userId=userId)
     return "invalid request"
 
 
@@ -30,7 +32,7 @@ def bulaRoute():
     if request.method == 'POST':
         userId = request.args.get("userId")
         bulaText = request.args.get("text")
-        createBula(userId=userId, bulaText=bulaText)
+        BulaService.createBula(userId=userId, bulaText=bulaText)
         return 'success'
     return "invalid request"
 
@@ -40,7 +42,7 @@ def rebulaRoute():
     if request.method == 'POST':
         userId = request.args.get("userId")
         bulaId = request.args.get("bulaId")
-        rebula(userId=userId, bulaId=bulaId)
+        BulaService.rebula(userId=userId, bulaId=bulaId)
         return 'success'
     return "invalid request"
 
@@ -49,14 +51,14 @@ def rebulaRoute():
 def hashtagRoute():
     if request.method == 'GET':
         hashtag = request.args.get("hashtagId")
-        return getBulasOfHashtag(hashtag=hashtag)
+        return BulaService.getBulasOfHashtag(hashtag=hashtag)
     return "invalid request"
 
 
 @app.route('/all-hashtags', methods=['GET'])
 def allHashtagsRoute():
     if request.method == 'GET':
-        return getAllHashtags()
+        return BulaService.getAllHashtags()
     return "invalid request"
 
 
@@ -65,7 +67,7 @@ def registerRoute():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        return register(username=username, password=password)
+        return UserService.register(username=username, password=password)
     return "invalid request"
 
 
@@ -74,14 +76,14 @@ def loginRoute():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        return login(username=username, password=password)
+        return UserService.login(username=username, password=password)
     return "invalid request"
 
 
 @app.route('/load', methods=['POST'])
 def loadData():
     if request.method == 'POST':
-        load()
+        RedisService.load()
         return "success"
     return "invalid request"
 
