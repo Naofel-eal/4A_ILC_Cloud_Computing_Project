@@ -2,6 +2,7 @@ from flask import Flask, request
 from backend.services.user_service import UserService
 from backend.services.bula_service import BulaService
 from backend.services.redis_service import RedisService
+import sys
 
 app = Flask(__name__)
 
