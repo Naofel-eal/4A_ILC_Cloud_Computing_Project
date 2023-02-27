@@ -2,8 +2,8 @@ import os, sys
 from pathlib import Path
 import csv
 import json
-from backend.services.bula_service import BulaService
-from backend.services.user_service import UserService
+from .bula_service import BulaService
+from .user_service import UserService
 
 
 class RedisService:

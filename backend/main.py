@@ -1,10 +1,19 @@
-from flask import Flask, request
-from backend.services.user_service import UserService
-from backend.services.bula_service import BulaService
-from backend.services.redis_service import RedisService
+from flask import Flask, request, abort
+from services.user_service import UserService
+from services.bula_service import BulaService
+from services.redis_service import RedisService
 import sys
 
 app = Flask(__name__)
+
+@app.before_request
+def before_request():
+    if request.path != '/login':
+        if request.headers.get('Authorization') == None:
+            return "no token in request's header"
+        else:
+            if not UserService.isValidToken(request.headers.get('Authorization')):
+                abort(403)
 
 @app.route('/')
 def default():
@@ -14,7 +23,7 @@ def default():
     
 
 @app.route('/all-bulas', methods=['GET'])
-def allBulasRoute() -> str:
+def allBulasRoute():
     if request.method == 'GET':
         return BulaService.getAllBulas()
     return "invalid request"
@@ -23,7 +32,7 @@ def allBulasRoute() -> str:
 @app.route('/user-bulas', methods=['GET'])
 def userBulasRoute():
     if request.method == 'GET':
-        userId = request.form.get("userId")
+        userId = request.headers.get('Authorization').split('_')[1]
         return BulaService.getBulasOfUser(userId=userId)
     return "invalid request"
 
@@ -31,10 +40,9 @@ def userBulasRoute():
 @app.route('/bula', methods=['POST'])
 def bulaRoute():
     if request.method == 'POST':
-        token = request.form.get("token")
-        userId = request.form.get("userId")
+        userId = request.headers.get('Authorization').split('_')[1]
         bulaText = request.form.get("text")
-        BulaService.createBula(token=token, userId=userId, bulaText=bulaText)
+        BulaService.createBula(userId=userId, bulaText=bulaText)
         return 'success'
     return "invalid request"
 
@@ -42,20 +50,18 @@ def bulaRoute():
 @app.route('/rebula', methods=['POST'])
 def rebulaRoute():
     if request.method == 'POST':
-        token = request.form.get("token")
-        userId = request.form.get("userId")
+        userId = request.headers.get('Authorization').split('_')[1]
         bulaId = request.form.get("bulaId")
-        BulaService.rebula(token=token, userId=userId, bulaId=bulaId)
+        BulaService.rebula(userId=userId, bulaId=bulaId)
         return 'success'
     return "invalid request"
 
 @app.route('/meow', methods=['POST'])
 def meow():
     if request.method == 'POST':
-        token = request.form.get("token")
-        userId = request.form.get("userId")
+        userId = request.headers.get('Authorization').split('_')[1]
         bulaId = request.form.get("bulaId")
-        BulaService.meow(token=token, userId=userId, bulaId=bulaId)
+        BulaService.meow(userId=userId, bulaId=bulaId)
         return 'success'
     return "invalid request" 
 
