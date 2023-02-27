@@ -2,6 +2,7 @@ from flask import Flask, request
 from backend.services.user_service import UserService
 from backend.services.bula_service import BulaService
 from backend.services.redis_service import RedisService
+import sys
 
 app = Flask(__name__)
 
@@ -97,4 +98,11 @@ def loadData():
 
 
 if __name__ == '__main__':
+    if len(sys.argv) > 1 :
+        if sys.argv[1] == "check_syntax":
+            print("Build [ OK ]")
+            exit(0)
+        else:
+            print("Passed argument not supported ! Supported argument : check_syntax")
+            exit(1)
     app.run(debug=True)
