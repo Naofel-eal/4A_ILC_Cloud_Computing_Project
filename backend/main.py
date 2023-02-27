@@ -46,6 +46,14 @@ def rebulaRoute():
         return 'success'
     return "invalid request"
 
+@app.route('/meow', methods=['POST'])
+def meow():
+    if request.method == 'POST':
+        userId = request.form.get("userId")
+        bulaId = request.form.get("bulaId")
+        BulaService.meow(userId=userId, bulaId=bulaId)
+        return 'success'
+    return "invalid request" 
 
 @app.route('/hashtag', methods=['GET'])
 def hashtagRoute():
