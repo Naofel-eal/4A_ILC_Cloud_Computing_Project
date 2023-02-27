@@ -2,6 +2,7 @@ from flask import Flask, request
 from backend.services.user_service import UserService
 from backend.services.bula_service import BulaService
 from backend.services.redis_service import RedisService
+import sys
 
 app = Flask(__name__)
 
@@ -30,9 +31,10 @@ def userBulasRoute():
 @app.route('/bula', methods=['POST'])
 def bulaRoute():
     if request.method == 'POST':
+        token = request.form.get("token")
         userId = request.form.get("userId")
         bulaText = request.form.get("text")
-        BulaService.createBula(userId=userId, bulaText=bulaText)
+        BulaService.createBula(token=token, userId=userId, bulaText=bulaText)
         return 'success'
     return "invalid request"
 
@@ -40,18 +42,20 @@ def bulaRoute():
 @app.route('/rebula', methods=['POST'])
 def rebulaRoute():
     if request.method == 'POST':
+        token = request.form.get("token")
         userId = request.form.get("userId")
         bulaId = request.form.get("bulaId")
-        BulaService.rebula(userId=userId, bulaId=bulaId)
+        BulaService.rebula(token=token, userId=userId, bulaId=bulaId)
         return 'success'
     return "invalid request"
 
 @app.route('/meow', methods=['POST'])
 def meow():
     if request.method == 'POST':
+        token = request.form.get("token")
         userId = request.form.get("userId")
         bulaId = request.form.get("bulaId")
-        BulaService.meow(userId=userId, bulaId=bulaId)
+        BulaService.meow(token=token, userId=userId, bulaId=bulaId)
         return 'success'
     return "invalid request" 
 
@@ -97,4 +101,11 @@ def loadData():
 
 
 if __name__ == '__main__':
+    if len(sys.argv) > 1 :
+        if sys.argv[1] == "check_syntax":
+            print("Build [ OK ]")
+            exit(0)
+        else:
+            print("Passed argument not supported ! Supported argument : check_syntax")
+            exit(1)
     app.run(debug=True)
