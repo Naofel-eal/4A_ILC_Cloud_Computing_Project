@@ -22,16 +22,16 @@ def allBulasRoute() -> str:
 @app.route('/user-bulas', methods=['GET'])
 def userBulasRoute():
     if request.method == 'GET':
-        userId = request.args.get("userId")
-        return BulaService.getBulasIdOfUser(userId=userId)
+        userId = request.form.get("userId")
+        return BulaService.getBulasOfUser(userId=userId)
     return "invalid request"
 
 
 @app.route('/bula', methods=['POST'])
 def bulaRoute():
     if request.method == 'POST':
-        userId = request.args.get("userId")
-        bulaText = request.args.get("text")
+        userId = request.form.get("userId")
+        bulaText = request.form.get("text")
         BulaService.createBula(userId=userId, bulaText=bulaText)
         return 'success'
     return "invalid request"
@@ -40,8 +40,8 @@ def bulaRoute():
 @app.route('/rebula', methods=['POST'])
 def rebulaRoute():
     if request.method == 'POST':
-        userId = request.args.get("userId")
-        bulaId = request.args.get("bulaId")
+        userId = request.form.get("userId")
+        bulaId = request.form.get("bulaId")
         BulaService.rebula(userId=userId, bulaId=bulaId)
         return 'success'
     return "invalid request"
@@ -50,7 +50,7 @@ def rebulaRoute():
 @app.route('/hashtag', methods=['GET'])
 def hashtagRoute():
     if request.method == 'GET':
-        hashtag = request.args.get("hashtagId")
+        hashtag = request.form.get("hashtagId")
         return BulaService.getBulasOfHashtag(hashtag=hashtag)
     return "invalid request"
 
