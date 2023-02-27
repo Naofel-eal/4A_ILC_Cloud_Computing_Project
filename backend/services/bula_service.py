@@ -11,16 +11,19 @@ class BulaService:
 
     def getAllBulas()-> dict:
         bulasDictionary: dict = {"bulas" : []}
-        for bula in BulaService.bulasDB.scan_iter('*'):
-            bulasDictionary['bulas'].append(bula)
+        for bulaID in BulaService.bulasDB.scan_iter('*'):
+            bulasDictionary['bulas'].append(BulaService.jsonifyBula(bulaID))
         return bulasDictionary
 
 
-    def getBulasIdOfUser(userId: str) -> json:
+    def getBulasOfUser(userId: str) -> json:
+        bulasDictionary: dict = {"bulas" : []}
         if(UserService.usersDB.exists(userId)):
             user: json = json.loads(UserService.usersDB.get(userId))
             del user['password']
-            return user
+            for bulaID in user['bulas']:
+                bulasDictionary['bulas'].append(BulaService.jsonifyBula(bulaID=bulaID))
+            return bulasDictionary
         return Utils.returnError("userId doesn't exist.")
 
 
@@ -60,13 +63,15 @@ class BulaService:
 
     
     def rebula(userId: str, bulaId: str) -> None:
-        user: json = json.loads(UserService.usersDB.get(userId))
-        user['bulas'].append(bulaId)
-        UserService.usersDB.set(userId, json.dumps(user))
-        
-        bula: json = json.loads(BulaService.bulasDB.get(bulaId))
-        bula['rebulas'].append(userId)
-        BulaService.bulasDB.set(bulaId, json.dumps(bula))
+        if not BulaService.check_userID_in_rebulas(json.loads(BulaService.bulasDB.get(bulaId)), userId):
+            #add bula in the user bulas list
+            user: json = json.loads(UserService.usersDB.get(userId))
+            user['bulas'].append(bulaId)
+            UserService.usersDB.set(userId, json.dumps(user))
+            #add userID in the rebula list
+            bula: json = json.loads(BulaService.bulasDB.get(bulaId))
+            bula['rebulas'].append(userId)
+            BulaService.bulasDB.set(bulaId, json.dumps(bula))
         
         
     def getAllHashtags()-> dict:
@@ -81,3 +86,17 @@ class BulaService:
             return json.loads(BulaService.hashtagDB.get(hashtag))
         else:
             return Utils.returnError("hashtag doesn't exist.")
+    
+    def jsonifyBula(bulaID) -> json:
+        jsonBula = json.loads(BulaService.bulasDB.get(bulaID))                
+        jsonBula['id'] = bulaID
+        return jsonBula
+    
+    def check_userID_in_rebulas(bula, userID):
+        if "rebulas" in bula:
+            if userID in bula["rebulas"]:
+                return True
+            else:
+                return False
+        else:
+            return False
