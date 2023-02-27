@@ -1,7 +1,11 @@
+import sys
 import redis
 import json
 import uuid
-from backend.utils.utils import Utils
+import datetime
+from pathlib import Path
+sys.path.append(Path(__file__).parent)
+from utils.utils import Utils
 
 class UserService:
     usersDB = redis.Redis(host="127.0.0.1", port=6379, db=2, decode_responses=True)
@@ -22,10 +26,8 @@ class UserService:
     def login(username: str, password: str) -> str:
         if UserService.usersDB.exists(username):
             user: json = json.loads(UserService.usersDB.get(username))
-            token: str = str(uuid.uuid4())
             if user['password'] == password:
-                UserService.tokensDB.set(username, token)
-                return token
+                return UserService.generateToken(userId=username)
             else:
                 return Utils.returnError("wrong password")
         else:
@@ -37,3 +39,29 @@ class UserService:
             if UserService.tokensDB.get(userId) == token:
                 return True
         return False
+
+    def generateToken(userId: str) -> str:
+        token: str = str(uuid.uuid4())
+        currentDate = datetime.date.today()
+        expirationDate = currentDate + datetime.timedelta(days=Utils.NB_OF_DAYS_BEFORE_TOKEN_EXPIRATION)
+        expirationDate = expirationDate.strftime("%d/%m/%Y")
+        tokenProperties = {
+            'token': token,
+            'expirationDate':  expirationDate
+        }
+        UserService.tokensDB.set(userId, json.dumps(tokenProperties))
+        return token + '_' + str(userId) 
+    
+    def isValidToken(key: str) -> bool:
+        token = key.split('_')[0]
+        userId = key.split('_')[1]
+        if UserService.tokensDB.exists(userId):
+            tokenProperties: json = json.loads(UserService.tokensDB.get(userId))
+            if tokenProperties['token'] == token:
+                expirationDate = datetime.datetime.strptime(tokenProperties['expirationDate'], '%d/%m/%Y').date()
+                currentDate = datetime.datetime.now().date()
+                return expirationDate > currentDate
+            else:
+                return False
+        else:
+            return False

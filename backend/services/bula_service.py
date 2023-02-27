@@ -2,8 +2,8 @@ import redis
 import uuid
 import json
 from datetime import datetime
-from backend.services.user_service import UserService
-from backend.utils.utils import Utils
+from .user_service import UserService
+from utils.utils import Utils
 
 class BulaService:
     bulasDB = redis.Redis(host="127.0.0.1", port=6379, db=0, decode_responses=True)
@@ -27,19 +27,18 @@ class BulaService:
         return Utils.returnError("userId doesn't exist.")
 
 
-    def createBula(token: str, userId: str, bulaText: str) -> None:
-        if UserService.validToken(token, userId):
-            bulaId = str(uuid.uuid1())
-            bula = {
-                'date': datetime.now().strftime("%d/%m/%Y %H:%M:%S"),
-                'author': userId,
-                'text': bulaText,
-                'meows': [],
-                'rebulas': []
-            }
-            BulaService.bulasDB.set(bulaId, json.dumps(bula))
-            BulaService.addBulaIdToUser(userId=userId, bulaId=bulaId)
-            BulaService.findHashtags(bulaText=bulaText, bulaId=bulaId)
+    def createBula(userId: str, bulaText: str) -> None:
+        bulaId = str(uuid.uuid1())
+        bula = {
+            'date': datetime.now().strftime("%d/%m/%Y %H:%M:%S"),
+            'author': userId,
+            'text': bulaText,
+            'meows': [],
+            'rebulas': []
+        }
+        BulaService.bulasDB.set(bulaId, json.dumps(bula))
+        BulaService.addBulaIdToUser(userId=userId, bulaId=bulaId)
+        BulaService.findHashtags(bulaText=bulaText, bulaId=bulaId)
 
 
     def addBulaIdToUser(userId: str, bulaId: str) -> None:
@@ -53,6 +52,7 @@ class BulaService:
         hashtags = []
         for word in words:
             if word.startswith("#"):
+                print("FIND", word)
                 hashtags.append(word)
         for hashtag in hashtags:
             if(BulaService.hashtagDB.exists(hashtag)):
@@ -63,18 +63,17 @@ class BulaService:
                 BulaService.hashtagDB.set(hashtag, json.dumps({'bulas': [bulaId]}))        
 
     
-    def rebula(token: str, userId: str, bulaId: str) -> None:
-        if UserService.validToken(token, userId):
-            if not BulaService.check_userID_in_rebulas(json.loads(BulaService.bulasDB.get(bulaId)), userId):
-                #add bula in the user bulas list
-                user: json = json.loads(UserService.usersDB.get(userId))
-                user['bulas'].append(bulaId)
-                
-                UserService.usersDB.set(userId, json.dumps(user))
-                #add userID in the rebula list
-                bula: json = json.loads(BulaService.bulasDB.get(bulaId))
-                bula['rebulas'].append(userId)
-                BulaService.bulasDB.set(bulaId, json.dumps(bula))
+    def rebula(userId: str, bulaId: str) -> None:
+        if not BulaService.check_userID_in_rebulas(json.loads(BulaService.bulasDB.get(bulaId)), userId):
+            #add bula in the user bulas list
+            user: json = json.loads(UserService.usersDB.get(userId))
+            user['bulas'].append(bulaId)
+            
+            UserService.usersDB.set(userId, json.dumps(user))
+            #add userID in the rebula list
+            bula: json = json.loads(BulaService.bulasDB.get(bulaId))
+            bula['rebulas'].append(userId)
+            BulaService.bulasDB.set(bulaId, json.dumps(bula))
         
         
     def getAllHashtags()-> dict:
@@ -90,18 +89,17 @@ class BulaService:
         else:
             return Utils.returnError("hashtag doesn't exist.")
     
-    def meow(token: str, userId: str, bulaId: str):
-        if UserService.validToken(token, userId):
-            if not BulaService.check_userID_in_meows(json.loads(BulaService.bulasDB.get(bulaId)), userId):
-                #add bula in the user bulas list
-                user: json = json.loads(UserService.usersDB.get(userId))
-                user['bulas'].append(bulaId)
-                
-                UserService.usersDB.set(userId, json.dumps(user))
-                #add userID in the rebula list
-                bula: json = json.loads(BulaService.bulasDB.get(bulaId))
-                bula['meows'].append(userId)
-                BulaService.bulasDB.set(bulaId, json.dumps(bula))
+    def meow(userId: str, bulaId: str):
+        if not BulaService.check_userID_in_meows(json.loads(BulaService.bulasDB.get(bulaId)), userId):
+            #add bula in the user bulas list
+            user: json = json.loads(UserService.usersDB.get(userId))
+            user['bulas'].append(bulaId)
+            
+            UserService.usersDB.set(userId, json.dumps(user))
+            #add userID in the rebula list
+            bula: json = json.loads(BulaService.bulasDB.get(bulaId))
+            bula['meows'].append(userId)
+            BulaService.bulasDB.set(bulaId, json.dumps(bula))
     
     
     def jsonifyBula(bulaID) -> json:
