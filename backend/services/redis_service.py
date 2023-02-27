@@ -8,11 +8,11 @@ from backend.services.user_service import UserService
 
 class RedisService:
     def load() -> None:
-        script_dir = str(Path.cwd())
-        print(script_dir)
-        usersFilePath = script_dir + '\\utils\\redis\\users.csv'
-        bulasFilePath = script_dir + '\\utils\\redis\\bulas.csv'
-        hashtagsFilePath = script_dir + '\\utils\\redis\\hashtags.csv'
+        BulaService.bulasDB.flushall()
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        usersFilePath = os.path.join(script_dir, '../utils/redis/users.csv')
+        bulasFilePath = os.path.join(script_dir, '../utils/redis/bulas.csv')
+        hashtagsFilePath = os.path.join(script_dir, '../utils/redis/hashtags.csv')
         
         with open(usersFilePath, 'r') as file:
             reader = csv.reader(file, delimiter=';')
