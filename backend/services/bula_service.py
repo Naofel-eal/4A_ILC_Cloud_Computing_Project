@@ -67,6 +67,7 @@ class BulaService:
             #add bula in the user bulas list
             user: json = json.loads(UserService.usersDB.get(userId))
             user['bulas'].append(bulaId)
+            
             UserService.usersDB.set(userId, json.dumps(user))
             #add userID in the rebula list
             bula: json = json.loads(BulaService.bulasDB.get(bulaId))
@@ -87,6 +88,19 @@ class BulaService:
         else:
             return Utils.returnError("hashtag doesn't exist.")
     
+    def meow(userId: str, bulaId: str):
+         if not BulaService.check_userID_in_meows(json.loads(BulaService.bulasDB.get(bulaId)), userId):
+            #add bula in the user bulas list
+            user: json = json.loads(UserService.usersDB.get(userId))
+            user['bulas'].append(bulaId)
+            
+            UserService.usersDB.set(userId, json.dumps(user))
+            #add userID in the rebula list
+            bula: json = json.loads(BulaService.bulasDB.get(bulaId))
+            bula['meows'].append(userId)
+            BulaService.bulasDB.set(bulaId, json.dumps(bula))
+    
+    
     def jsonifyBula(bulaID) -> json:
         jsonBula = json.loads(BulaService.bulasDB.get(bulaID))                
         jsonBula['id'] = bulaID
@@ -95,6 +109,15 @@ class BulaService:
     def check_userID_in_rebulas(bula, userID):
         if "rebulas" in bula:
             if userID in bula["rebulas"]:
+                return True
+            else:
+                return False
+        else:
+            return False
+        
+    def check_userID_in_meows(bula, userID):
+        if "meows" in bula:
+            if userID in bula["meows"]:
                 return True
             else:
                 return False
