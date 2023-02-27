@@ -31,9 +31,10 @@ def userBulasRoute():
 @app.route('/bula', methods=['POST'])
 def bulaRoute():
     if request.method == 'POST':
+        token = request.form.get("token")
         userId = request.form.get("userId")
         bulaText = request.form.get("text")
-        BulaService.createBula(userId=userId, bulaText=bulaText)
+        BulaService.createBula(token=token, userId=userId, bulaText=bulaText)
         return 'success'
     return "invalid request"
 
@@ -41,18 +42,20 @@ def bulaRoute():
 @app.route('/rebula', methods=['POST'])
 def rebulaRoute():
     if request.method == 'POST':
+        token = request.form.get("token")
         userId = request.form.get("userId")
         bulaId = request.form.get("bulaId")
-        BulaService.rebula(userId=userId, bulaId=bulaId)
+        BulaService.rebula(token=token, userId=userId, bulaId=bulaId)
         return 'success'
     return "invalid request"
 
 @app.route('/meow', methods=['POST'])
 def meow():
     if request.method == 'POST':
+        token = request.form.get("token")
         userId = request.form.get("userId")
         bulaId = request.form.get("bulaId")
-        BulaService.meow(userId=userId, bulaId=bulaId)
+        BulaService.meow(token=token, userId=userId, bulaId=bulaId)
         return 'success'
     return "invalid request" 
 
