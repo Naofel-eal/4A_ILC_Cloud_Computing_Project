@@ -50,11 +50,11 @@ class UserService:
             'expirationDate':  expirationDate
         }
         UserService.tokensDB.set(userId, json.dumps(tokenProperties))
-        return token + '_' + str(userId) 
+        return token + '/' + str(userId) 
     
     def isValidToken(key: str) -> bool:
-        token = key.split('_')[0]
-        userId = key.split('_')[1]
+        token = key.split('/')[0]
+        userId = key.split('/')[1]
         if UserService.tokensDB.exists(userId):
             tokenProperties: json = json.loads(UserService.tokensDB.get(userId))
             if tokenProperties['token'] == token:

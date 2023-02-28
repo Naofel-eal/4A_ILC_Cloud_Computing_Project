@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 @app.before_request
 def before_request():
-    if request.path != '/login':
+    if request.path not in ['/login', '/register', '/load']:
         if request.headers.get('Authorization') == None:
             return "no token in request's header"
         else:
@@ -32,7 +32,7 @@ def allBulasRoute():
 @app.route('/user-bulas', methods=['GET'])
 def userBulasRoute():
     if request.method == 'GET':
-        userId = request.headers.get('Authorization').split('_')[1]
+        userId = request.form.get("userId")
         return BulaService.getBulasOfUser(userId=userId)
     return "invalid request"
 
@@ -40,7 +40,7 @@ def userBulasRoute():
 @app.route('/bula', methods=['POST'])
 def bulaRoute():
     if request.method == 'POST':
-        userId = request.headers.get('Authorization').split('_')[1]
+        userId = request.headers.get('Authorization').split('/')[1]
         bulaText = request.form.get("text")
         BulaService.createBula(userId=userId, bulaText=bulaText)
         return 'success'
@@ -50,7 +50,7 @@ def bulaRoute():
 @app.route('/rebula', methods=['POST'])
 def rebulaRoute():
     if request.method == 'POST':
-        userId = request.headers.get('Authorization').split('_')[1]
+        userId = request.headers.get('Authorization').split('/')[1]
         bulaId = request.form.get("bulaId")
         BulaService.rebula(userId=userId, bulaId=bulaId)
         return 'success'
@@ -59,7 +59,7 @@ def rebulaRoute():
 @app.route('/meow', methods=['POST'])
 def meow():
     if request.method == 'POST':
-        userId = request.headers.get('Authorization').split('_')[1]
+        userId = request.headers.get('Authorization').split('/')[1]
         bulaId = request.form.get("bulaId")
         BulaService.meow(userId=userId, bulaId=bulaId)
         return 'success'
