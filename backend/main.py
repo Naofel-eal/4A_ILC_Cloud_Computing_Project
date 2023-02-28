@@ -7,7 +7,7 @@ import sys
 app = Flask(__name__)
 
 @app.before_request
-def before_request():
+def beforeRequest():
     if request.path not in ['/login', '/register', '/load']:
         if request.headers.get('Authorization') == None:
             return "no token in request's header"
