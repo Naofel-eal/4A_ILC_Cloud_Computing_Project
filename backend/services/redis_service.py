@@ -1,5 +1,4 @@
-import os, sys
-from pathlib import Path
+import os
 import csv
 import json
 from .bula_service import BulaService
@@ -35,9 +34,10 @@ class RedisService:
                 bulas = json.loads(row[1])
                 BulaService.hashtagDB.set(hashtag, json.dumps(bulas))
 
-        RedisService.save_redis_data()
+        RedisService.saveRedisData()
                 
-    def save_redis_data():
+                
+    def saveRedisData():
         BulaService.bulasDB.save()
         BulaService.hashtagDB.save()
         UserService.usersDB.save()

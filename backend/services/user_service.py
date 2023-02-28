@@ -40,6 +40,7 @@ class UserService:
                 return True
         return False
 
+
     def generateToken(userId: str) -> str:
         token: str = str(uuid.uuid4())
         currentDate = datetime.date.today()
@@ -51,6 +52,7 @@ class UserService:
         }
         UserService.tokensDB.set(userId, json.dumps(tokenProperties))
         return token + '/' + str(userId) 
+    
     
     def isValidToken(key: str) -> bool:
         token = key.split('/')[0]
