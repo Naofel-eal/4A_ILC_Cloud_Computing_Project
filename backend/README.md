@@ -22,7 +22,6 @@ docker run --name redis-bula -p 6379:6379 redis
 # API Reference
 
 ## Sign Up
----
 Route to sign up.
 ```http
   GET /register
@@ -37,7 +36,6 @@ Route to sign up.
 <br>
 
 ## Sign In
----
 Route to sign in.
 ```http
   GET /login
@@ -55,7 +53,6 @@ User's token.
 <br>
 
 ## Get all bulas
----
 Route to get all bulas of the application.
 ```http
   GET /all-bulas
@@ -70,6 +67,13 @@ Route to get all bulas of the application.
 ```python
   {
     'bulas': [
+      {
+        'date': {date format "%d/%m/%Y %H:%M:%S"},
+        'author': {userId of the author of the bula},
+        'text': {text of the bula},
+        'meows': [{userId}, ...],
+        'rebulas': [{userId}, ...]
+      },
       ...
     ]
   }
@@ -78,7 +82,6 @@ Route to get all bulas of the application.
 <br>
 
 ## Get all bulas of a user
----
 Route to get all bulas of a specified user.
 ```http
   GET /user-bulas
@@ -98,6 +101,36 @@ Route to get all bulas of a specified user.
 ```python
   {
     'bulas': [
+      {
+        'date': {date format "%d/%m/%Y %H:%M:%S"},
+        'author': {userId of the author of the bula},
+        'text': {text of the bula},
+        'meows': [{userId}, ...],
+        'rebulas': [{userId}, ...]
+      },
+      ...
+    ]
+  }
+```
+
+<br>
+
+## Get all hashtags
+Route to get all hashtags of the application.
+```http
+  GET /all-hashtags
+```
+
+**Header :**
+| Parameter       | Type     | Description                       |
+| :--------       | :------- | :-------------------------------- |
+| `Authorization` | `string` | **Required**. User's token        |
+
+**Return :**
+```python
+  {
+    'hashtags': [
+      {hashtag}, 
       ...
     ]
   }
