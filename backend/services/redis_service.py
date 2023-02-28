@@ -36,6 +36,7 @@ class RedisService:
 
         RedisService.saveRedisData()
                 
+                
     def saveRedisData():
         BulaService.bulasDB.save()
         BulaService.hashtagDB.save()

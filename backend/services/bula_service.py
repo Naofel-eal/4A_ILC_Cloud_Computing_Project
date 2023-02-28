@@ -107,11 +107,13 @@ class BulaService:
         jsonBula['id'] = bulaID
         return jsonBula
     
+    
     def check_userID_in_rebulas(bula, userID):
         if "rebulas" in bula:
             if userID in bula["rebulas"]:
                 return True
         return False
+        
         
     def check_userID_in_meows(bula, userID):
         if "meows" in bula:

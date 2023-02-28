@@ -10,10 +10,11 @@ app = Flask(__name__)
 def beforeRequest():
     if request.path not in ['/login', '/register', '/load']:
         if request.headers.get('Authorization') == None:
-            return "no token in request's header"
+            abort(400)
         else:
             if not UserService.isValidToken(request.headers.get('Authorization')):
                 abort(403)
+
 
 @app.route('/')
 def default():
@@ -56,6 +57,7 @@ def rebulaRoute():
         return 'success'
     return "invalid request"
 
+
 @app.route('/meow', methods=['POST'])
 def meow():
     if request.method == 'POST':
@@ -64,6 +66,7 @@ def meow():
         BulaService.meow(userId=userId, bulaId=bulaId)
         return 'success'
     return "invalid request" 
+
 
 @app.route('/hashtag', methods=['GET'])
 def hashtagRoute():
