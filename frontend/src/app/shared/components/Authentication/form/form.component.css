@@ -1,0 +1,70 @@
+.container {
+    background-color: rgba(0, 0, 0, 0.65);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 45rem;
+    border-radius: 30px;
+    box-shadow: 4px 4px 8px -4px #000;
+}
+
+.semi-circle {
+    height: 4rem;
+    width: 8rem;
+    border-radius: 150px 150px 0 0;
+    position: relative;
+    top: -4rem;
+    background-color: rgba(0, 0, 0, 0.65);
+}
+
+.logo {
+    width: 7.5rem;
+    position: relative;
+    top: -8rem;
+    margin-bottom: -8rem;
+}
+
+h1 {
+    font-size: 3.5rem;
+    text-transform: uppercase;
+    margin-top: 1rem;
+}
+
+label {
+    font-size: 1.6rem;
+    margin-top: 2rem;
+}
+
+input {
+    width: 30rem;
+    font-size: 1.5rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 10px;
+    margin-top: 1rem;
+    background-color: rgba(157, 167, 173, 0.75);
+}
+
+button {
+    background-color: #E97C21;
+    font-size: 1.5rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 3rem;
+}
+
+p {
+    text-align: center;
+    font-size: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 2.5rem;
+}
+
+.auth {
+    color: #fff;
+    text-decoration: underline;
+    cursor: pointer;
+}
