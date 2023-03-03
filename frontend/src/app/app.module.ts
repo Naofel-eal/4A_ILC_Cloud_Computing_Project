@@ -7,6 +7,9 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ProfileComponent } from './profile/profile.component';
+import { NavbarComponent } from './shared/components/navbar/navbar.component';
+import { BulaComponent } from './shared/components/bula/bula.component';
+import { TrendComponent } from './shared/components/trend/trend.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +17,10 @@ import { ProfileComponent } from './profile/profile.component';
     HomeComponent,
     LoginComponent,
     RegisterComponent,
-    ProfileComponent
+    ProfileComponent,
+    NavbarComponent,
+    BulaComponent,
+    TrendComponent,
   ],
   imports: [
     BrowserModule,
