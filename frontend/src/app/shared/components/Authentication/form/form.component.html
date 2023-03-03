@@ -5,15 +5,15 @@
     <h1>{{formType}}</h1>
 
     <label for="username">Username:</label>
-    <input type="text" name="username" [(ngModel)]="username">
+    <input type="text" name="username" maxlength="15" [(ngModel)]="username">
 
     <label for="password">Password:</label>
     <input type="password" name="password" [(ngModel)]="password">
 
     <label for="confirm-password" *ngIf="formType == 'Sign up'">Confirm password:</label>
-    <input type="password" name="confirm-password" *ngIf="formType == 'Sign up'" [(ngModel)]="confirm_password">
+    <input type="password" name="confirm-password" maxlength="30" *ngIf="formType == 'Sign up'" [(ngModel)]="confirm_password">
 
-    <button>{{formType}}</button>
+    <button (clic)="authenticationRequest()">{{formType}}</button>
 
     <p> or
         <br>
