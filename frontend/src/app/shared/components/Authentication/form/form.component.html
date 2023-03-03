@@ -1,0 +1,23 @@
+<div class="container">
+    <div class="semi-circle"></div>
+    <img  class='logo' src="/assets/bula.svg" alt="Bula-logo"/>
+
+    <h1>{{formType}}</h1>
+
+    <label for="username">Username:</label>
+    <input type="text" name="username" [(ngModel)]="username">
+
+    <label for="password">Password:</label>
+    <input type="password" name="password" [(ngModel)]="password">
+
+    <label for="confirm-password" *ngIf="formType == 'Sign up'">Confirm password:</label>
+    <input type="password" name="confirm-password" *ngIf="formType == 'Sign up'" [(ngModel)]="confirm_password">
+
+    <button>{{formType}}</button>
+
+    <p> or
+        <br>
+        <a class="auth" *ngIf="formType == 'Sign in'" routerLink="/register">Sign up</a>
+        <a class="auth" *ngIf="formType == 'Sign up'" routerLink="/login">Sign in</a>
+    </p>
+</div>
