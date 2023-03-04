@@ -1,4 +1,11 @@
 <app-background></app-background>
 <div class="container">
-  <app-navbar></app-navbar>  
+  <app-navbar></app-navbar>
+  <div class="bulaContainer">
+    <app-bula
+      *ngFor="let bula of bulas"
+      [bula]="bula"
+    ></app-bula>
+  </div>
+  <app-trend></app-trend>
 </div>

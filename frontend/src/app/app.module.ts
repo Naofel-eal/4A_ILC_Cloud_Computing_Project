@@ -11,9 +11,10 @@ import { RegisterComponent } from './register/register.component';
 import { ProfileComponent } from './profile/profile.component';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { BulaComponent } from './shared/components/bula/bula.component';
-import { TrendComponent } from './shared/components/trend/trend.component';
 import { FormComponent } from './shared/components/Authentication/form/form.component';
 import { BackgroundComponent } from './shared/components/background/background.component';
+import { TrendComponent } from './home/trend/trend.component';
+import { BulaContentFormatterDirective } from './shared/directives/bula-content-formatter.directive';
 
 @NgModule({
   declarations: [
@@ -24,9 +25,10 @@ import { BackgroundComponent } from './shared/components/background/background.c
     ProfileComponent,
     NavbarComponent,
     BulaComponent,
-    TrendComponent,
     FormComponent,
     BackgroundComponent,
+    TrendComponent,
+    BulaContentFormatterDirective
   ],
   imports: [
     BrowserModule,

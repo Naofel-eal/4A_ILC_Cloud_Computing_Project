@@ -1,0 +1,68 @@
+.container {
+    width: 50vw;
+    height: fit-content;
+    background-color: rgba(0, 0, 0, 0.65);
+    border-radius: 10px;
+    padding: 1rem;
+    padding-bottom: 0;
+    box-shadow: 4px 4px 8px -4px #000;
+    margin-bottom: 1rem;
+}
+
+.bottomSection {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid rgba(71, 167, 255, 0.2);
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.bottomSection p {
+    font-size: 1.2rem;
+}
+
+.bulaInfos {
+    display: flex;
+    align-items: center;
+    width: 80%;
+}
+
+.bulaInfos > * {
+    margin-right: 1rem;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+}
+
+.actionBtns {
+    display: flex;
+    color: #47A7FF;
+    margin-right: 1rem;
+}
+
+.image {
+    width: 2rem;
+}
+
+.meowImg {
+    margin-right: 0.3rem;
+}
+
+.bulaImg {
+    margin-right: 0.2rem;
+}
+
+p {
+    font-size: 1.5rem;
+}
+
+.meowsNumber, .rebulasNumber {
+    color: #47A7FF;
+}
+
+.clickable {
+    cursor: pointer;
+}
