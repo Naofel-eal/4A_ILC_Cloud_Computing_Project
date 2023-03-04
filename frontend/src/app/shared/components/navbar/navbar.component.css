@@ -1,0 +1,54 @@
+.container {
+    background-color: rgba(0, 0, 0, 0.65);
+    width: 4rem;
+    border-radius: 30px;
+    box-shadow: 4px 4px 8px -4px #000;
+    height: 35rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.bula {
+    position: absolute;
+    top: 0.5rem;
+    width: 3.5rem;
+    transition: transform 0.4s ease;
+}
+
+.bula:hover {
+    transform: rotate(180deg);
+}
+
+.logo-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo {
+    width: 2.5rem;
+    margin-bottom: 1.5rem;
+    cursor: pointer;
+    transition: transform 0.1s ease;
+}
+
+.logo:hover, .logout:hover{
+    transform: scale(1.2);
+}
+
+.logo:last-child {
+    margin-bottom: 0rem;
+}
+
+.logout {
+    position: absolute;
+    bottom: 1rem;
+    margin-left: 0.4rem;
+    width: 1.6rem;
+    cursor: pointer;
+    transition: transform 0.1s ease;
+}
