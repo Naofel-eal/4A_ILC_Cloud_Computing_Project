@@ -2,13 +2,16 @@ from flask import Flask, request, abort
 from services.user_service import UserService
 from services.bula_service import BulaService
 from services.redis_service import RedisService
+from flask_cors import CORS
 import sys
 
 app = Flask(__name__)
 
+CORS(app)
+
 @app.before_request
 def beforeRequest():
-    if request.path not in ['/login', '/register', '/load']:
+    if request.path not in ['/', '/login', '/register', '/load']:
         if request.headers.get('Authorization') == None:
             abort(400)
         else:

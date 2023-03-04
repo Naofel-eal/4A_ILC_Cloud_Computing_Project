@@ -27,7 +27,7 @@ class UserService:
         if UserService.usersDB.exists(username):
             user: json = json.loads(UserService.usersDB.get(username))
             if user['password'] == password:
-                return UserService.generateToken(userId=username)
+                return {"token": UserService.generateToken(userId=username)}
             else:
                 return Utils.returnError("wrong password")
         else:
