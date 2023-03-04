@@ -6,6 +6,7 @@ import datetime
 from pathlib import Path
 sys.path.append(Path(__file__).parent)
 from utils.utils import Utils
+from flask import abort
 
 class UserService:
     usersDB = redis.Redis(host="127.0.0.1", port=6379, db=2, decode_responses=True)
@@ -13,7 +14,7 @@ class UserService:
 
     def register(username: str, password: str) -> str:
         if UserService.usersDB.exists(username):
-            return Utils.returnError("username already exists.")
+            return abort(409)
         else:
             user = {
                 'password': password,
@@ -29,9 +30,9 @@ class UserService:
             if user['password'] == password:
                 return {"token": UserService.generateToken(userId=username)}
             else:
-                return Utils.returnError("wrong password")
+                return abort(403)
         else:
-            return Utils.returnError("username doesn't exist")
+            return abort(403)
         
         
     def validToken(token: str, userId: str) -> bool:

@@ -6,18 +6,20 @@
 
     <form (ngSubmit)="authenticationRequest()">
         <label for="username">Username:</label>
-        <input type="text" name="username" minlength="2" maxlength="15" [(ngModel)]="username">
+        <input type="text" name="username" maxlength="20" autocomplete="off" [(ngModel)]="username" (input)="error=''">
 
         <label for="password">Password:</label>
-        <input type="password" name="password" [(ngModel)]="password">
+        <input type="password" name="password" maxlength="30" [(ngModel)]="password" (input)="error=''">
 
         <label for="confirm-password" *ngIf="formType == 'Sign up'">Confirm password:</label>
-        <input type="password" name="confirm-password" maxlength="30" *ngIf="formType == 'Sign up'" [(ngModel)]="confirm_password">
+        <input type="password" name="confirm-password" maxlength="30" *ngIf="formType == 'Sign up'" [(ngModel)]="confirm_password" (input)="error=''">
+
+        <p class="error">{{error}}</p>
 
         <button type="submit">{{formType}}</button>
     </form>
 
-    <p> or
+    <p class="auth-options"> or
         <br>
         <a class="auth" *ngIf="formType == 'Sign in'" routerLink="/register">Sign up</a>
         <a class="auth" *ngIf="formType == 'Sign up'" routerLink="/login">Sign in</a>
