@@ -14,6 +14,7 @@ import { BulaComponent } from './shared/components/bula/bula.component';
 import { FormComponent } from './shared/components/Authentication/form/form.component';
 import { BackgroundComponent } from './shared/components/background/background.component';
 import { TrendComponent } from './home/trend/trend.component';
+import { BulaContentFormatterDirective } from './shared/directives/bula-content-formatter.directive';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { TrendComponent } from './home/trend/trend.component';
     FormComponent,
     BackgroundComponent,
     TrendComponent,
+    BulaContentFormatterDirective
   ],
   imports: [
     BrowserModule,

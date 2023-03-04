@@ -9,3 +9,13 @@
 app-navbar {
     margin-left: 1rem;
 }
+
+app-trend {
+    margin-right: 1rem;
+}
+
+.bulaContainer {
+    padding: 1rem 0;
+    height: 100vh;
+    margin: 0 auto;
+}

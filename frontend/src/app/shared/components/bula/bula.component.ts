@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Bula } from '../../models/Bula.model';
 
 @Component({
   selector: 'app-bula',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./bula.component.css']
 })
 export class BulaComponent {
-
+  @Input() bula: Bula;
 }
