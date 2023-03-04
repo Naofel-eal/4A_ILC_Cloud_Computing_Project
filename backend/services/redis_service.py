@@ -19,7 +19,7 @@ class RedisService:
                 username = row[0]
                 user = json.loads(row[1])
                 UserService.usersDB.set(username, json.dumps(user))
-                
+        
         with open(bulasFilePath, 'r') as file:
             reader = csv.reader(file, delimiter=';')
             for row in reader:

@@ -15,13 +15,18 @@ export class FormComponent {
 
   @Input() formType = '';
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
   public authenticationRequest() {
-    const formData: FormData = new FormData();
-    formData.append("username", this.username);
-    formData.append("password", this.password);
+    const url = 'http://127.0.0.1:5000/login';
     
+    const formData = new FormData();
+    formData.append('username', this.username);
+    formData.append('password', this.password);
+
+    this.http.post(url, formData).subscribe(response => {
+      console.log(response);
+    });
   }
 
   public checkUsername() {

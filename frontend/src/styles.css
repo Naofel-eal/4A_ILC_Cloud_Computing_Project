@@ -6,6 +6,25 @@
     padding: 0;
 }
 
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #F7C300 #444;
+}
+
+*::-webkit-scrollbar {
+    width: 10px; 
+  }
+  
+*::-webkit-scrollbar-track {
+    background: #111;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #F7C300; 
+    border-radius: 20px; 
+    border: 1.5px solid #F56800; 
+}
+
 body {
     font-family: 'Roboto', serif, 'Times New Roman', Times, serif;
     color: #fff;
@@ -21,7 +40,19 @@ input {
     color: #fff;
 }
 
-@media (max-width: 800px) {
+@media (-webkit-device-pixel-ratio: 1.1) { 
+    html {
+        font-size: 90.9%;
+    }
+ }
+
+ @media (-webkit-device-pixel-ratio: 1.25) { 
+    html {
+        font-size: 80%;
+    }
+ }
+
+ @media (max-width: 800px) {
     html {
         font-size: 80%;
     }

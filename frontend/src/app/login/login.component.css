@@ -1,9 +1,12 @@
-app-form {
-    height: 100vh;
-    width: 100vw;
+.container {
+    max-width: 100vw;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    
+}
+
+app-form {
+    margin: 5rem 1rem;
 }
