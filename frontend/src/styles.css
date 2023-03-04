@@ -21,7 +21,19 @@ input {
     color: #fff;
 }
 
-@media (max-width: 800px) {
+@media (-webkit-device-pixel-ratio: 1.1) { 
+    html {
+        font-size: 90.9%;
+    }
+ }
+
+ @media (-webkit-device-pixel-ratio: 1.25) { 
+    html {
+        font-size: 80%;
+    }
+ }
+
+ @media (max-width: 800px) {
     html {
         font-size: 80%;
     }
