@@ -15,17 +15,17 @@ class UserService:
         if UserService.usersDB.exists(username):
             return Utils.returnError("username already exists.")
         else:
-            user: dict = {
+            user = {
                 'password': password,
                 'bulas': []
             }
             UserService.usersDB.set(username, json.dumps(user))
-            return "success"
+            return {"token": UserService.generateToken(userId=username)}
 
 
     def login(username: str, password: str) -> str:
         if UserService.usersDB.exists(username):
-            user: json = json.loads(UserService.usersDB.get(username))
+            user = json.loads(UserService.usersDB.get(username))
             if user['password'] == password:
                 return {"token": UserService.generateToken(userId=username)}
             else:
@@ -58,7 +58,7 @@ class UserService:
         token = key.split('/')[0]
         userId = key.split('/')[1]
         if UserService.tokensDB.exists(userId):
-            tokenProperties: json = json.loads(UserService.tokensDB.get(userId))
+            tokenProperties = json.loads(UserService.tokensDB.get(userId))
             if tokenProperties['token'] == token:
                 expirationDate = datetime.datetime.strptime(tokenProperties['expirationDate'], '%d/%m/%Y').date()
                 currentDate = datetime.datetime.now().date()
