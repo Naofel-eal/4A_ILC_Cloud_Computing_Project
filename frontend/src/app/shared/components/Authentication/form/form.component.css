@@ -54,6 +54,12 @@ button {
     border-radius: 10px;
     cursor: pointer;
     margin-top: 3rem;
+    transition: background-color 0.08s ease;
+}
+
+button:hover {
+    background-color: #ee944b;
+    opacity: 1;
 }
 
 p {

@@ -1,0 +1,11 @@
+.container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+app-navbar {
+    margin-left: 1rem;
+}
