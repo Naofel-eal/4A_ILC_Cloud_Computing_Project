@@ -2,13 +2,16 @@ from flask import Flask, request, abort
 from services.user_service import UserService
 from services.bula_service import BulaService
 from services.redis_service import RedisService
+from flask_cors import CORS
 import sys
 
 app = Flask(__name__)
 
+CORS(app)
+
 @app.before_request
 def beforeRequest():
-    if request.path not in ['/login', '/register', '/load']:
+    if request.path not in ['/', '/login', '/register', '/load']:
         if request.headers.get('Authorization') == None:
             abort(400)
         else:
@@ -20,14 +23,14 @@ def beforeRequest():
 def default():
     if request.method == 'GET':
         return '''<h1>Bula API v0.0.0</h1>'''
-    return "invalid request"
+    abort(400)
     
 
 @app.route('/all-bulas', methods=['GET'])
 def allBulasRoute():
     if request.method == 'GET':
         return BulaService.getAllBulas()
-    return "invalid request"
+    abort(400)
 
 
 @app.route('/user-bulas', methods=['GET'])
@@ -35,7 +38,7 @@ def userBulasRoute():
     if request.method == 'GET':
         userId = request.form.get("userId")
         return BulaService.getBulasOfUser(userId=userId)
-    return "invalid request"
+    abort(400)
 
 
 @app.route('/bula', methods=['POST'])
@@ -44,8 +47,8 @@ def bulaRoute():
         userId = request.headers.get('Authorization').split('/')[1]
         bulaText = request.form.get("text")
         BulaService.createBula(userId=userId, bulaText=bulaText)
-        return 'success'
-    return "invalid request"
+        return {"status": 200}
+    abort(400)
 
 
 @app.route('/rebula', methods=['POST'])
@@ -54,8 +57,8 @@ def rebulaRoute():
         userId = request.headers.get('Authorization').split('/')[1]
         bulaId = request.form.get("bulaId")
         BulaService.rebula(userId=userId, bulaId=bulaId)
-        return 'success'
-    return "invalid request"
+        return {"status": 200}
+    abort(400)
 
 
 @app.route('/meow', methods=['POST'])
@@ -64,8 +67,8 @@ def meow():
         userId = request.headers.get('Authorization').split('/')[1]
         bulaId = request.form.get("bulaId")
         BulaService.meow(userId=userId, bulaId=bulaId)
-        return 'success'
-    return "invalid request" 
+        return {"status": 200}
+    abort(400) 
 
 
 @app.route('/hashtag', methods=['GET'])
@@ -73,14 +76,14 @@ def hashtagRoute():
     if request.method == 'GET':
         hashtag = request.form.get("hashtagId")
         return BulaService.getBulasOfHashtag(hashtag=hashtag)
-    return "invalid request"
+    abort(400)
 
 
 @app.route('/all-hashtags', methods=['GET'])
 def allHashtagsRoute():
     if request.method == 'GET':
         return BulaService.getAllHashtags()
-    return "invalid request"
+    abort(400)
 
 
 @app.route('/register', methods=['POST'])
@@ -89,7 +92,7 @@ def registerRoute():
         username = request.form['username']
         password = request.form['password']
         return UserService.register(username=username, password=password)
-    return "invalid request"
+    abort(400)
 
 
 @app.route('/login', methods=['POST'])
@@ -98,15 +101,15 @@ def loginRoute():
         username = request.form['username']
         password = request.form['password']
         return UserService.login(username=username, password=password)
-    return "invalid request"
+    abort(400)
 
 
 @app.route('/load', methods=['POST'])
 def loadData():
     if request.method == 'POST':
         RedisService.load()
-        return "success"
-    return "invalid request"
+        return {"status": 200}
+    abort(400)
 
 
 if __name__ == '__main__':
