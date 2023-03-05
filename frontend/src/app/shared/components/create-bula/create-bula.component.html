@@ -3,7 +3,7 @@
         <img src="/assets/bula.svg" />
         <textarea autosize placeholder="Write your bula here..." maxlength="400" [(ngModel)]="bulaText"></textarea>
         <div class="buttons-container">
-            <button>Cancel</button>
+            <button (click)="closeComponentCreateBula()">Cancel</button>
             <button>Bula</button>
         </div>
     </div>

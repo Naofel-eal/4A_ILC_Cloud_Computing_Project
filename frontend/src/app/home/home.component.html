@@ -1,6 +1,7 @@
 <app-background></app-background>
 <div class="container">
-  <app-navbar></app-navbar>
+  <app-create-bula *ngIf="isCreateBulaVisible" (closeComponent)="close_create_bula($event)"></app-create-bula>
+  <app-navbar (onClickBula)="switch_create_bula_visibility()"></app-navbar>
   <div class="bulaContainer">
     <app-bula
       *ngFor="let bula of bulas"

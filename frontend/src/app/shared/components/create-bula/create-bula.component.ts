@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-create-bula',
@@ -8,5 +8,11 @@ import { Component, Input } from '@angular/core';
 export class CreateBulaComponent {
 
   public bulaText = '';
+
+  @Output() closeComponent = new EventEmitter<boolean>();
+
+  public closeComponentCreateBula() {
+    this.closeComponent.emit(false);
+  }
 
 }
