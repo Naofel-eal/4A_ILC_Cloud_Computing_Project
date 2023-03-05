@@ -11,7 +11,7 @@ CORS(app)
 
 @app.before_request
 def beforeRequest():
-    if request.path not in ['/', '/login', '/register', '/load']:
+    if request.path not in ['/', '/user/login', '/user/register', '/load']:
         if request.headers.get('Authorization') == None:
             abort(400)
         else:
@@ -26,14 +26,14 @@ def default():
     abort(400)
     
 
-@app.route('/all-bulas', methods=['GET'])
+@app.route('/bula/all-bulas', methods=['GET'])
 def allBulasRoute():
     if request.method == 'GET':
         return BulaService.getAllBulas()
     abort(400)
 
 
-@app.route('/user-bulas', methods=['GET'])
+@app.route('/bula/user-bulas', methods=['GET'])
 def userBulasRoute():
     if request.method == 'GET':
         userId = request.form.get("userId")
@@ -41,7 +41,7 @@ def userBulasRoute():
     abort(400)
 
 
-@app.route('/bula', methods=['POST'])
+@app.route('/bula/post-bula', methods=['POST'])
 def bulaRoute():
     if request.method == 'POST':
         userId = request.headers.get('Authorization').split('/')[1]
@@ -51,7 +51,7 @@ def bulaRoute():
     abort(400)
 
 
-@app.route('/rebula', methods=['POST'])
+@app.route('/bula/rebula', methods=['POST'])
 def rebulaRoute():
     if request.method == 'POST':
         userId = request.headers.get('Authorization').split('/')[1]
@@ -61,7 +61,7 @@ def rebulaRoute():
     abort(400)
 
 
-@app.route('/meow', methods=['POST'])
+@app.route('/bula/meow', methods=['POST'])
 def meow():
     if request.method == 'POST':
         userId = request.headers.get('Authorization').split('/')[1]
@@ -71,7 +71,7 @@ def meow():
     abort(400) 
 
 
-@app.route('/hashtag', methods=['GET'])
+@app.route('/bula/hashtag', methods=['GET'])
 def hashtagRoute():
     if request.method == 'GET':
         hashtag = request.form.get("hashtagId")
@@ -79,14 +79,14 @@ def hashtagRoute():
     abort(400)
 
 
-@app.route('/all-hashtags', methods=['GET'])
+@app.route('/bula/all-hashtags', methods=['GET'])
 def allHashtagsRoute():
     if request.method == 'GET':
         return BulaService.getAllHashtags()
     abort(400)
 
 
-@app.route('/register', methods=['POST'])
+@app.route('/user/register', methods=['POST'])
 def registerRoute():
     if request.method == 'POST':
         username = request.form['username']
@@ -95,7 +95,7 @@ def registerRoute():
     abort(400)
 
 
-@app.route('/login', methods=['POST'])
+@app.route('/user/login', methods=['POST'])
 def loginRoute():
     if request.method == 'POST':
         username = request.form['username']
