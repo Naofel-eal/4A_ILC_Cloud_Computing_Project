@@ -56,7 +56,7 @@ export class FormComponent {
         this.http.post(this.apiConstantsService.API_URL_USER_LOGIN, formData).subscribe({
           
           next : (response : any) => {
-            if(response.token != '') { localStorage.setItem('token', response.token); }
+            localStorage.setItem('token', response.token);
             this.router.navigateByUrl('/home');
           },
 
@@ -71,8 +71,8 @@ export class FormComponent {
         this.http.post(this.apiConstantsService.API_URL_USER_REGISTER, formData).subscribe({
           
           next : (response : any) => {
-            if(response.token != '') { localStorage.setItem('token', response.token); }
-            this.router.navigateByUrl('/home');
+              localStorage.setItem('token', response.token); 
+              this.router.navigateByUrl('/home');
           },
 
           error : (error) => {
