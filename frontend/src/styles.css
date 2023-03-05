@@ -12,7 +12,7 @@
 }
 
 *::-webkit-scrollbar {
-    width: 10px; 
+    width: 8px;
   }
   
 *::-webkit-scrollbar-track {
@@ -38,6 +38,10 @@ button {
 input {
     font-family: 'Roboto', serif, 'Times New Roman', Times, serif;
     color: #fff;
+}
+
+input:focus {
+    outline: none;
 }
 
 @media (-webkit-device-pixel-ratio: 1.1) { 

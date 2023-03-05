@@ -7,6 +7,17 @@ import { Bula } from '../shared/models/Bula.model';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
+
+  public isCreateBulaVisible = false;
+
+  public close_create_bula(isVisible : boolean) {
+    this.isCreateBulaVisible = isVisible;
+  }
+
+  public switch_create_bula_visibility() {
+    this.isCreateBulaVisible = !this.isCreateBulaVisible;
+  }
+
   public bulas: Bula[] = [
     new Bula(
       "On rigole on rigole mais vous avez déjà vu des chinois à une pompe à essence ? #LesChinoisRestezOuVousEtes et #masterclass",

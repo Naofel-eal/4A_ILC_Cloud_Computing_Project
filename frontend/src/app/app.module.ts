@@ -15,6 +15,8 @@ import { FormComponent } from './shared/components/Authentication/form/form.comp
 import { BackgroundComponent } from './shared/components/background/background.component';
 import { TrendComponent } from './home/trend/trend.component';
 import { BulaContentFormatterDirective } from './shared/directives/bula-content-formatter.directive';
+import { CreateBulaComponent } from './shared/components/create-bula/create-bula.component';
+import {AutosizeModule} from 'ngx-autosize';
 
 @NgModule({
   declarations: [
@@ -28,13 +30,15 @@ import { BulaContentFormatterDirective } from './shared/directives/bula-content-
     FormComponent,
     BackgroundComponent,
     TrendComponent,
-    BulaContentFormatterDirective
+    BulaContentFormatterDirective,
+    CreateBulaComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AutosizeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
