@@ -1,34 +1,25 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class AuthGuard implements CanActivate {
-  constructor(private router: Router) {}
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree {
+  constructor(private router: Router) { }
+
+  canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     const token = localStorage.getItem('token');
-    if (token && (this.isLoginPage() || this.isRegisterPage()) && !this.isOnHomePage()) {
-      return this.router.parseUrl('/home');
-    } else if (!token && !this.isLoginPage() && !this.isRegisterPage()) {
-      return this.router.parseUrl('/login');
-    } else {
-      return true;
+    const isRedirect = state.url === '/login' || state.url === '/register';
+
+    if (!token && !isRedirect) {
+      return this.router.navigateByUrl('/login').then(() => false);
     }
+
+    if (token && isRedirect) {
+      return this.router.navigateByUrl('/home').then(() => false);
+    }
+
+    return true;
   }
-  
-  isLoginPage() {
-    return this.router.url.includes('/login');
-  }
-  
-  isRegisterPage() {
-    return this.router.url.includes('/register');
-  }
-  
-  isOnHomePage() {
-    return this.router.url.includes('/home');
-  }
-  
 }
