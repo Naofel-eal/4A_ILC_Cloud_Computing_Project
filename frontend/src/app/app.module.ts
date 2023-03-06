@@ -15,6 +15,8 @@ import { FormComponent } from './shared/components/Authentication/form/form.comp
 import { BackgroundComponent } from './shared/components/background/background.component';
 import { TrendComponent } from './home/trend/trend.component';
 import { BulaContentFormatterDirective } from './shared/directives/bula-content-formatter.directive';
+import { GsapComponent } from './gsap/gsap.component';
+import { BulasCarouselComponent } from './shared/components/bulas-carousel/bulas-carousel.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { BulaContentFormatterDirective } from './shared/directives/bula-content-
     FormComponent,
     BackgroundComponent,
     TrendComponent,
-    BulaContentFormatterDirective
+    BulaContentFormatterDirective,
+    GsapComponent,
+    BulasCarouselComponent
   ],
   imports: [
     BrowserModule,
@@ -37,6 +41,7 @@ import { BulaContentFormatterDirective } from './shared/directives/bula-content-
     HttpClientModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: [BulaContentFormatterDirective]
 })
 export class AppModule { }

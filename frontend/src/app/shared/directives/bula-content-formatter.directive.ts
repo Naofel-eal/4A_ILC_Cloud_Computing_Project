@@ -1,13 +1,20 @@
-import { Directive, ElementRef, Renderer2 } from '@angular/core';
+import { Directive, ElementRef, Renderer2, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 @Directive({
   selector: '[appBulaContentFormatter]'
 })
-export class BulaContentFormatterDirective {
+export class BulaContentFormatterDirective implements OnChanges {
+  @Input() bulaText: string;
+
   constructor(private el: ElementRef, private renderer: Renderer2) { }
 
-  ngAfterViewInit() {
-    const text = this.el.nativeElement.textContent;
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['bulaText'] && changes['bulaText'].currentValue) {
+      this.addSpanToHashtag(changes['bulaText'].currentValue);
+    }
+  }
+
+  private addSpanToHashtag(text: string) {
     const parts = text.split('#');
     const fragment = document.createDocumentFragment();
     for (let i = 0; i < parts.length; ++i) {
