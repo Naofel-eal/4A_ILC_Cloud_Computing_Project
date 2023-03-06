@@ -15,7 +15,6 @@ import { FormComponent } from './shared/components/Authentication/form/form.comp
 import { BackgroundComponent } from './shared/components/background/background.component';
 import { TrendComponent } from './home/trend/trend.component';
 import { BulaContentFormatterDirective } from './shared/directives/bula-content-formatter.directive';
-import { GsapComponent } from './gsap/gsap.component';
 import { BulasCarouselComponent } from './shared/components/bulas-carousel/bulas-carousel.component';
 
 @NgModule({
@@ -31,7 +30,6 @@ import { BulasCarouselComponent } from './shared/components/bulas-carousel/bulas
     BackgroundComponent,
     TrendComponent,
     BulaContentFormatterDirective,
-    GsapComponent,
     BulasCarouselComponent
   ],
   imports: [
