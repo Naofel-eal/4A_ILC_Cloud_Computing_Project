@@ -52,7 +52,6 @@ class BulaService:
         hashtags = []
         for word in words:
             if word.startswith("#"):
-                print("FIND", word)
                 hashtags.append(word)
         for hashtag in hashtags:
             if(BulaService.hashtagDB.exists(hashtag)):
