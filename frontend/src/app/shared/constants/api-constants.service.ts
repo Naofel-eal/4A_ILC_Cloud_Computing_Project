@@ -6,11 +6,11 @@ import { Injectable } from '@angular/core';
 
 export class ApiConstantsService {
 
-  readonly API_URL = 'http://127.0.0.1:5000';
+  readonly API_URL = 'http://127.0.0.1:8888';
 
   readonly API_URL_USER_LOGIN = this.API_URL + '/user/login';
   readonly API_URL_USER_REGISTER = this.API_URL + '/user/register';
-
+  
   readonly API_URL_BULA_ALL_BULAS = this.API_URL + '/bula/all-bulas';
   readonly API_URL_BULA_USER_BULAS = this.API_URL + '/bula/user-bulas';
   readonly API_URL_BULA_POST_BULA = this.API_URL + '/bula/post-bula';

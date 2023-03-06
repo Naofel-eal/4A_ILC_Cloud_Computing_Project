@@ -20,7 +20,7 @@ export class HomeComponent {
 
   public bulas: Bula[] = [
     new Bula(
-      "On rigole on rigole mais vous avez déjà vu des chinois à une pompe à essence ? #LesChinoisRestezOuVousEtes et #masterclass",
+      "On rigole on rigole mais vous avez déjà vu des chinois à une pompe à essence ? #LesChinoisRestezOuVousEtes #masterclass",
       "pessi2012",
       1251,
       433
@@ -36,6 +36,45 @@ export class HomeComponent {
       "pessi2012",
       1251,
       433
-    )
+    ),
+    new Bula(
+      "On rigole on rigole mais vous avez déjà vu des chinois à une pompe à essence ? #LesChinoisRestezOuVousEtes #masterclass",
+      "pessi2012",
+      1251,
+      433
+    ),
+    new Bula(
+      "Les raclis de ce réseau on dirait on leur a interdit de dire des choses censées et intelligentes #antiRacli #MaisPasAntiRaclette",
+      "pessi2012",
+      888,
+      223
+    ),
+    new Bula(
+      "Macaque à vendre 4000€ cash. reste plus rien presque #LesChinoisRestezOuVousEtes",
+      "pessi2012",
+      1251,
+      433
+    ),
+    new Bula(
+      "On rigole on rigole mais vous avez déjà vu des chinois à une pompe à essence ? #LesChinoisRestezOuVousEtes #masterclass",
+      "pessi2012",
+      1251,
+      433
+    ),
+    new Bula(
+      "Les raclis de ce réseau on dirait on leur a interdit de dire des choses censées et intelligentes #antiRacli #MaisPasAntiRaclette",
+      "pessi2012",
+      888,
+      223
+    ),
+    new Bula(
+      "Macaque à vendre 4000€ cash. reste plus rien presque #LesChinoisRestezOuVousEtes",
+      "pessi2012",
+      1251,
+      433
+    ),
   ];
+
+
+
 }

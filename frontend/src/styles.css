@@ -28,6 +28,7 @@
 body {
     font-family: 'Roboto', serif, 'Times New Roman', Times, serif;
     color: #fff;
+    overflow-x: hidden;
 }
 
 button {

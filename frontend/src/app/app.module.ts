@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -15,8 +15,10 @@ import { FormComponent } from './shared/components/Authentication/form/form.comp
 import { BackgroundComponent } from './shared/components/background/background.component';
 import { TrendComponent } from './home/trend/trend.component';
 import { BulaContentFormatterDirective } from './shared/directives/bula-content-formatter.directive';
+import { BulasCarouselComponent } from './shared/components/bulas-carousel/bulas-carousel.component';
 import { CreateBulaComponent } from './shared/components/create-bula/create-bula.component';
 import {AutosizeModule} from 'ngx-autosize';
+import { RequestInterceptor } from './interceptors/request.interceptor';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,8 @@ import {AutosizeModule} from 'ngx-autosize';
     BackgroundComponent,
     TrendComponent,
     BulaContentFormatterDirective,
-    CreateBulaComponent
+    BulasCarouselComponent,
+    CreateBulaComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,7 +43,8 @@ import {AutosizeModule} from 'ngx-autosize';
     HttpClientModule,
     AutosizeModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true }],
+  bootstrap: [AppComponent],
+  exports: [BulaContentFormatterDirective]
 })
 export class AppModule { }

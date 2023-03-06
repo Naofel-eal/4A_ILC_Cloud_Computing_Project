@@ -8,14 +8,17 @@
 
 app-navbar {
     margin-left: 1rem;
-}
-
-app-trend {
-    margin-right: 1rem;
+    width: 25%;
 }
 
 .bulaContainer {
-    padding: 1rem 0;
+    padding: 1rem 0px;
     height: 100vh;
     margin: 0 auto;
+}
+
+app-trend {
+    width: 25%;
+    display: flex;
+    justify-content: center;
 }
