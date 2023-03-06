@@ -19,6 +19,7 @@ import { BulasCarouselComponent } from './shared/components/bulas-carousel/bulas
 import { CreateBulaComponent } from './shared/components/create-bula/create-bula.component';
 import {AutosizeModule} from 'ngx-autosize';
 import { RequestInterceptor } from './interceptors/request.interceptor';
+import { AuthGuard } from './guards/auth.guard';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,7 @@ import { RequestInterceptor } from './interceptors/request.interceptor';
     HttpClientModule,
     AutosizeModule
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true }],
+  providers: [AuthGuard],
   bootstrap: [AppComponent],
   exports: [BulaContentFormatterDirective]
 })
