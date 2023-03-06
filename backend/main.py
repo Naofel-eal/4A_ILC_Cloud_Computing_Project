@@ -1,23 +1,29 @@
-from flask import Flask, request, abort
+from flask import Flask, Response, request, abort
 from services.user_service import UserService
 from services.bula_service import BulaService
 from services.redis_service import RedisService
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 import sys
 
 app = Flask(__name__)
-
-CORS(app)
+CORS(app, supports_credentials=True, origins=['*'])
 
 @app.before_request
 def beforeRequest():
+    if request.method == 'OPTIONS':
+        return Response(status=200)
+    
     if request.path not in ['/', '/user/login', '/user/register', '/load']:
         if request.headers.get('Authorization') == None:
             abort(400)
         else:
             if not UserService.isValidToken(request.headers.get('Authorization')):
-                abort(403)
-
+                abort(401)
+                
+@app.after_request
+def acceptCORS(response):
+    response.headers.add('Access-Control-Allow-Headers', '*')
+    return response
 
 @app.route('/')
 def default():

@@ -28,11 +28,12 @@ class UserService:
         if UserService.usersDB.exists(username):
             user = json.loads(UserService.usersDB.get(username))
             if user['password'] == password:
-                return {"token": UserService.generateToken(userId=username)}
+                token = UserService.generateToken(userId=username)
+                return {"token": token}
             else:
-                return abort(403)
+                return abort(401)
         else:
-            return abort(403)
+            return abort(401)
         
         
     def validToken(token: str, userId: str) -> bool:
