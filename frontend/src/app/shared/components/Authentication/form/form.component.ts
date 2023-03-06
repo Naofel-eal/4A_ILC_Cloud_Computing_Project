@@ -1,12 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-
-export interface Response {
-  status: number,
-  token: string,
-  message: string
-}
+import { ApiConstantsService } from 'src/app/shared/constants/api-constants.service';
 
 @Component({
   selector: 'app-form',
@@ -23,13 +18,10 @@ export class FormComponent {
 
   @Input() formType = '';
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router, private apiConstantsService: ApiConstantsService) { }
 
   public authenticationRequest() {  
-    const formData = new FormData();
-    formData.append('username', this.username);
-    formData.append('password', this.password);
-
+    
     if(this.formType == 'Sign up' && !this.checkUsername()) {
       this.error = 'Username is incorrect.';
       return;
@@ -45,43 +37,51 @@ export class FormComponent {
       return;
     }
 
-    switch (this.formType) {
-      case 'Sign in' : 
-        this.http.post('http://127.0.0.1:5000/login', formData).subscribe((response : any) => {
-          if(response.token != '') {
-            localStorage.setItem('token', response.token);
-          }
-          this.router.navigateByUrl('/home');
-        },
-        (error) => {
-          if(error.status == 403) {
-            this.error = 'Incorrect username or password.';
-          }
-        }
-        );
-        break;
-
-      case 'Sign up' :
-        this.http.post('http://127.0.0.1:5000/register', formData).subscribe((response : any) => {
-          if(response.token != '') {
-            localStorage.setItem('token', response.token);
-          }
-          this.router.navigateByUrl('/home');
-        },
-        (error) => {
-          if(error.status == 409) {
-            this.error = 'Username already exists.';
-          }
-        }
-        );
-        break;
-    }    
+    this.sendRequest();
   }
 
   public checkUsername() {
     const alphanumeric = /^[0-9a-zA-Z_]+$/;
     const length = /^.{3,20}$/;
     return alphanumeric.test(this.username) && length.test(this.username);
+  }
+
+  private sendRequest() {
+    const formData = new FormData();
+    formData.append('username', this.username);
+    formData.append('password', this.password);
+
+    switch (this.formType) {
+      case 'Sign in' : 
+        this.http.post(this.apiConstantsService.API_URL_USER_LOGIN, formData).subscribe({
+          
+          next : (response : any) => {
+            localStorage.setItem('token', response.token);
+            this.router.navigateByUrl('/home');
+          },
+
+          error : (error) => {
+            if(error.status == 403) { this.error = 'Incorrect username or password.'; }
+          }
+
+        });
+        break;
+
+      case 'Sign up' :
+        this.http.post(this.apiConstantsService.API_URL_USER_REGISTER, formData).subscribe({
+          
+          next : (response : any) => {
+              localStorage.setItem('token', response.token); 
+              this.router.navigateByUrl('/home');
+          },
+
+          error : (error) => {
+            if(error.status == 409) { this.error = 'Username already exists.'; }
+          }
+
+        });
+        break;
+    }
   }
 
 }

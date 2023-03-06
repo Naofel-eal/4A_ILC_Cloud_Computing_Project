@@ -16,6 +16,8 @@ import { BackgroundComponent } from './shared/components/background/background.c
 import { TrendComponent } from './home/trend/trend.component';
 import { BulaContentFormatterDirective } from './shared/directives/bula-content-formatter.directive';
 import { BulasCarouselComponent } from './shared/components/bulas-carousel/bulas-carousel.component';
+import { CreateBulaComponent } from './shared/components/create-bula/create-bula.component';
+import {AutosizeModule} from 'ngx-autosize';
 
 @NgModule({
   declarations: [
@@ -30,13 +32,15 @@ import { BulasCarouselComponent } from './shared/components/bulas-carousel/bulas
     BackgroundComponent,
     TrendComponent,
     BulaContentFormatterDirective,
-    BulasCarouselComponent
+    BulasCarouselComponent,
+    CreateBulaComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AutosizeModule
   ],
   providers: [],
   bootstrap: [AppComponent],
