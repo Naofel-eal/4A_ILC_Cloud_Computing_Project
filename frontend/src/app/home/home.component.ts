@@ -73,7 +73,7 @@ export class HomeComponent implements OnInit{
     this.http.get(this.apiConstantsService.API_URL_BULA_ALL_BULAS).subscribe({
       next : (response : any) => {
         for (let bula of response['bulas']) {
-          this.bulas.push(new Bula(bula['text'], bula['author'], bula['meows'].length, bula['rebulas'].length))
+          this.bulas.push(new Bula(bula['text'], bula['author'], bula['meows'], bula['rebulas']))
         }
       },
       error : (error) => {

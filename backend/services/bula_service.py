@@ -91,12 +91,10 @@ class BulaService:
     
     def meow(userId: str, bulaId: str):
         if not BulaService.check_userID_in_meows(json.loads(BulaService.bulasDB.get(bulaId)), userId):
-            #add bula in the user bulas list
             user: json = json.loads(UserService.usersDB.get(userId))
             user['bulas'].append(bulaId)
             
             UserService.usersDB.set(userId, json.dumps(user))
-            #add userID in the rebula list
             bula: json = json.loads(BulaService.bulasDB.get(bulaId))
             bula['meows'].append(userId)
             BulaService.bulasDB.set(bulaId, json.dumps(bula))
@@ -105,6 +103,8 @@ class BulaService:
     def jsonifyBula(bulaID) -> json:
         jsonBula = json.loads(BulaService.bulasDB.get(bulaID))                
         jsonBula['id'] = bulaID
+        jsonBula['meows'] = len(jsonBula['meows'])
+        jsonBula['rebulas'] = len(jsonBula['rebulas'])
         return jsonBula
     
     
