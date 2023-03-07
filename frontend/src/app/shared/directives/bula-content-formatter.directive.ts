@@ -26,7 +26,7 @@ export class BulaContentFormatterDirective implements OnChanges {
         fragment.appendChild(span);
         fragment.appendChild(document.createTextNode(rest));
         span.style.color = '#F7C300';
-        span.classList.add('hashtag');
+        span.style.cursor = 'pointer';
       } else {
         fragment.appendChild(document.createTextNode(parts[i]));
       }
