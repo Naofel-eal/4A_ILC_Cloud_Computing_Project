@@ -24,11 +24,39 @@
     border-radius: 15px;
 }
 
-img {
+.bula-logo {
     width: 4rem;
     border-radius: 50%;
     background-color: #fff;
     border-radius: 40%;
+}
+
+.close-logo {
+    width: 1.2rem;
+    transition: transform 0.1s ease-in;
+}
+
+.close-logo:hover {
+    transform: rotate(90deg);
+}
+
+.close {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    width: 1.8rem;
+    height: 1.8rem;
+    border-radius: 50%;
+    cursor: pointer;
+    background-color: #b80000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+}
+
+.close:hover {
+    background-color: #db2525;
 }
 
 textarea {
@@ -50,11 +78,15 @@ textarea:focus {
     outline: none;
 }
 
-button:last-child {
-    margin-left: 1rem;
+.limit-char {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin: 0 0.2rem 0.5rem 0;
+    width: 100%;
 }
 
-button {
+.bula {
     background-color: #E97C21;
     font-size: 1rem;
     padding: 0.5rem 1rem;
@@ -64,7 +96,7 @@ button {
     transition: background-color 0.08s ease;
 }
 
-button:hover {
+.bula:hover {
     background-color: #ee944b;
     opacity: 1;
 }
