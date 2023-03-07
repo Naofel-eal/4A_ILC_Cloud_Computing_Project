@@ -11,62 +11,7 @@ import { ApiConstantsService } from '../shared/constants/api-constants.service';
 export class HomeComponent implements OnInit{
   constructor(private http: HttpClient, private apiConstantsService: ApiConstantsService) { }
   
-  public bulas: Bula[] = []/* [
-    new Bula(
-      "On rigole on rigole mais vous avez déjà vu des chinois à une pompe à essence ? #LesChinoisRestezOuVousEtes #masterclass",
-      "pessi2012",
-      1251,
-      433
-    ),
-    new Bula(
-      "Les raclis de ce réseau on dirait on leur a interdit de dire des choses censées et intelligentes #antiRacli #MaisPasAntiRaclette",
-      "pessi2012",
-      888,
-      223
-    ),
-    new Bula(
-      "Macaque à vendre 4000€ cash. reste plus rien presque #LesChinoisRestezOuVousEtes",
-      "pessi2012",
-      1251,
-      433
-    ),
-    new Bula(
-      "On rigole on rigole mais vous avez déjà vu des chinois à une pompe à essence ? #LesChinoisRestezOuVousEtes #masterclass",
-      "pessi2012",
-      1251,
-      433
-    ),
-    new Bula(
-      "Les raclis de ce réseau on dirait on leur a interdit de dire des choses censées et intelligentes #antiRacli #MaisPasAntiRaclette",
-      "pessi2012",
-      888,
-      223
-    ),
-    new Bula(
-      "Macaque à vendre 4000€ cash. reste plus rien presque #LesChinoisRestezOuVousEtes",
-      "pessi2012",
-      1251,
-      433
-    ),
-    new Bula(
-      "On rigole on rigole mais vous avez déjà vu des chinois à une pompe à essence ? #LesChinoisRestezOuVousEtes #masterclass",
-      "pessi2012",
-      1251,
-      433
-    ),
-    new Bula(
-      "Les raclis de ce réseau on dirait on leur a interdit de dire des choses censées et intelligentes #antiRacli #MaisPasAntiRaclette",
-      "pessi2012",
-      888,
-      223
-    ),
-    new Bula(
-      "Macaque à vendre 4000€ cash. reste plus rien presque #LesChinoisRestezOuVousEtes",
-      "pessi2012",
-      1251,
-      433
-    ),
-  ];*/
+  public bulas: Bula[] = []
   public isCreateBulaVisible = false;
 
   ngOnInit(): void {
@@ -89,7 +34,7 @@ export class HomeComponent implements OnInit{
       next : (response : any) => {
         this.bulas = []
         for (let bula of response['bulas']) {
-          this.bulas.push(new Bula(bula['text'], bula['author'], bula['meows'], bula['rebulas'],  bula['date']))
+          this.bulas.push(new Bula(bula['text'], bula['author'], bula['meows'], bula['rebulas'],  bula['date'], bula['id']))
         }
         this.sortBulasByDate();
       },

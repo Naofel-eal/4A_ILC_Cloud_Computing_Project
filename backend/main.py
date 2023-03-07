@@ -53,7 +53,7 @@ def bulaRoute():
         userId = request.headers.get('Authorization').split('/')[1]
         bulaText = request.form.get("text")
         BulaService.createBula(userId=userId, bulaText=bulaText)
-        return {"status": 200}
+        return Response(status=200)
     abort(400)
 
 
@@ -63,7 +63,7 @@ def rebulaRoute():
         userId = request.headers.get('Authorization').split('/')[1]
         bulaId = request.form.get("bulaId")
         BulaService.rebula(userId=userId, bulaId=bulaId)
-        return {"status": 200}
+        return Response(status=200)
     abort(400)
 
 
@@ -73,7 +73,7 @@ def meow():
         userId = request.headers.get('Authorization').split('/')[1]
         bulaId = request.form.get("bulaId")
         BulaService.meow(userId=userId, bulaId=bulaId)
-        return {"status": 200}
+        return Response(status=200)
     abort(400) 
 
 
@@ -114,7 +114,7 @@ def loginRoute():
 def loadData():
     if request.method == 'POST':
         RedisService.load()
-        return {"status": 200}
+        return Response(status=200)
     abort(400)
 
 

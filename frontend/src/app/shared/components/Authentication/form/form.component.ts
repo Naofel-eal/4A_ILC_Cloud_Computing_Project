@@ -63,7 +63,6 @@ export class FormComponent {
           error : (error) => {
             if(error.status == 401) { this.error = 'Incorrect username or password.'; }
           }
-
         });
         break;
 
