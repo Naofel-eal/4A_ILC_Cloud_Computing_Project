@@ -1,6 +1,7 @@
 <div class="background">
     <div class="container">
-        <img src="/assets/bula.svg" />
+        <img class="bula-logo" src="/assets/bula.svg" />
+        <button class="close" (click)="closeComponentCreateBula()"><img class="close-logo" src="/assets/close.svg" /></button>
         <textarea 
             autosize
             placeholder="Write your bula here..."
@@ -8,9 +9,7 @@
             (input)="checkText($event)"
             [(ngModel)]="bulaText">
         </textarea>
-        <div class="buttons-container">
-            <button (click)="closeComponentCreateBula()">Cancel</button>
-            <button (click)="bula()">Bula</button>
-        </div>
+        <p class="limit-char">{{nbCharacters}}/280 characters.</p>
+        <button class="bula">Bula</button>
     </div>
 </div>
