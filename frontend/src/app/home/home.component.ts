@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit{
   
   public bulas: Bula[] = []
   public isCreateBulaVisible = false;
+  public isTopicsVisible = false;
 
   ngOnInit(): void {
     this.loadAllBulas();

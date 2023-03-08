@@ -7,11 +7,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class NavbarComponent {
 
-  @Output() onClickBula = new EventEmitter<boolean>();
-
-  public send_create_bula_clicked() {
-    this.onClickBula.emit(true);
-  }
+  public isCreateBulaVisible = false;
+  public isTopicsVisible = false;
 
   public clearToken() {
     localStorage.removeItem('token');

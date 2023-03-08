@@ -79,7 +79,7 @@ class BulaService:
     def getAllHashtags()-> dict:
         hashtagsDictionnary: dict = {"hashtags" : []}
         for hashtag in BulaService.hashtagDB.scan_iter('*'):
-            hashtagsDictionnary['hashtags'].append(hashtag)
+            hashtagsDictionnary['hashtags'].append({'hashtag': hashtag, 'number': len(json.loads(BulaService.hashtagDB.get(hashtag))['bulas'])})
         return hashtagsDictionnary
 
 

@@ -1,6 +1,5 @@
-<app-background></app-background>
 <div class="container">
-  <app-navbar (onClickBula)="switch_create_bula_visibility()"></app-navbar>
+  <app-navbar></app-navbar>
   <div class="bulaContainer">
     <app-bula
       *ngFor="let bula of bulas"
@@ -8,5 +7,4 @@
     ></app-bula>
   </div>
   <app-trend></app-trend>
-  <app-create-bula *ngIf="isCreateBulaVisible" (closeComponent)="close_create_bula($event)"></app-create-bula>
 </div>
