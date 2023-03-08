@@ -7,7 +7,7 @@ import { Bula } from '../../models/Bula.model';
   styleUrls: ['./bulas-carousel.component.css']
 })
 export class BulasCarouselComponent {
-  public bulas: Bula[] = [
+  public bulas: Bula[] = [/*
     new Bula("#OffreEmploi Développeur Angular en CDI, salaire attractif #JobPosting", "devjobs", 1560, 719),
     new Bula("Leçon de cuisine : comment faire une tarte aux pommes #RecetteFacile", "maman_cuisine", 354, 63),
     new Bula("Nouvelle vidéo sur ma chaîne Youtube : apprendre à jouer de la guitare #Musique", "guitarhero", 1789, 321),
@@ -18,7 +18,7 @@ export class BulasCarouselComponent {
     new Bula("Je vais bientôt partir en vacances, des idées de destination ? #Travel", "wanderlust", 678, 112),
     new Bula("J'ai enfin réussi à faire mon premier plat végétarien, c'était délicieux ! #CuisineVégé", "veggiecooking", 432, 89),
     new Bula("Comment améliorer son anglais en 3 mois #LangueEtrangere", "polyglotte", 1045, 327)
-  ];
+*/];
   currentIndex = 0;
 
   get prevIndex() {

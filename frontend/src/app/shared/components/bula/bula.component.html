@@ -8,12 +8,24 @@
                 <img  class='image bulaImg' src="/assets/bula.svg" alt="Bula-logo"/>
                 <p class="clickable authorText">{{bula.author}}</p>
             </div>
-            <p class="clickable meowsText"><span class="meowsNumber">{{bula.meows}}</span> meows</p>
-            <p class="clickable rebulaText"><span class="rebulasNumber">{{bula.rebulas}}</span> rebulas</p>
+            <p class="clickable meowsText"><span class="meowsNumber">{{bula.meows.length}}</span> meows</p>
+            <p class="clickable rebulaText"><span class="rebulasNumber">{{bula.rebulas.length}}</span> rebulas</p>
         </div>
         <div class="actionBtns">
-            <img  class='clickable image meowImg' src="/assets/bula/meow.svg" alt="Meow-logo"/>
-            <img  class='clickable image rebulaImg' src="/assets/bula/rebula.svg" alt="Rebula-logo"/>
+            <img  
+                class='clickable image meowImg' 
+                (click)="onMeowBtnClicked()" 
+                src="/assets/bula/meow.svg" 
+                alt="Meow-logo"
+                [ngClass]="isBulaMeowed ? 'bulaMeowed' : 'bulaUnmeowed'"
+                />
+            <img  
+                class='clickable image rebulaImg' 
+                (click)="onRebulaBtnClicked()"
+                src="/assets/bula/rebula.svg" 
+                alt="Rebula-logo"
+                [ngClass]="isBulaRebuled ? 'bulaRebuled' : 'bulaUnrebuled'"
+                />
         </div>
     </div>
 </div>
