@@ -10,7 +10,7 @@ import { ApiConstantsService } from '../../constants/api-constants.service';
 })
 export class CreateBulaComponent {
 
-  constructor(private http: HttpClient, private router: Router, private apiConstantsService: ApiConstantsService) { }
+  constructor(private http: HttpClient, private apiConstantsService: ApiConstantsService) { }
   public bulaText = '';
   public nbCharacters = 0;
   private linesLimit: number = 6;
@@ -32,7 +32,7 @@ export class CreateBulaComponent {
 
     this.http.post(this.apiConstantsService.API_URL_BULA_POST_BULA, formData).subscribe({      
       next : (response : any) => {
-        this.closeComponentCreateBula();
+        this.closeComponent.emit(true)
       },
 
       error : (error) => {

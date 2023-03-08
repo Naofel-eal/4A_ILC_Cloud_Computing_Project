@@ -17,9 +17,10 @@ export class BulaContentFormatterDirective implements OnChanges {
   private addSpanToHashtag(text: string) {
     const parts = text.split('#');
     const fragment = document.createDocumentFragment();
+    const wordRegex = /[^\w\u00C0-\u024F]+/;
     for (let i = 0; i < parts.length; ++i) {
       if (i !== 0) {
-        const word = parts[i].split(/\W+/)[0];
+        const word = parts[i].split(wordRegex)[0];
         const rest = parts[i].slice(word.length);
         const span = document.createElement('span');
         span.textContent = '#' + word;

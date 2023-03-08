@@ -99,12 +99,22 @@ class BulaService:
             bula['meows'].append(userId)
             BulaService.bulasDB.set(bulaId, json.dumps(bula))
     
+    def unmeow(userId: str, bulaId: str):
+        bula = json.loads(BulaService.bulasDB.get(bulaId))
+        if userId in bula["meows"]:
+            bula["meows"].remove(userId)
+        BulaService.bulasDB.set(bulaId, json.dumps(bula))
+        
+    def unrebula(userId: str, bulaId: str):
+        bula = json.loads(BulaService.bulasDB.get(bulaId))
+        if userId in bula["rebulas"]:
+            bula["rebulas"].remove(userId)
+        BulaService.bulasDB.set(bulaId, json.dumps(bula))
+        
     
     def jsonifyBula(bulaID) -> json:
         jsonBula = json.loads(BulaService.bulasDB.get(bulaID))                
         jsonBula['id'] = bulaID
-        jsonBula['meows'] = len(jsonBula['meows'])
-        jsonBula['rebulas'] = len(jsonBula['rebulas'])
         return jsonBula
     
     
