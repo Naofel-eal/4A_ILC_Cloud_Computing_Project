@@ -48,7 +48,6 @@ class BulaService:
 
     
     def findHashtags(bulaText: str, bulaId: str) -> None:
-        print(bulaText)
         words = bulaText.split()
         hashtags = []
         for word in words:
