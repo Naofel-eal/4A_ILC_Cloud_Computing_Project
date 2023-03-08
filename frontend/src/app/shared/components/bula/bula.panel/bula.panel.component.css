@@ -15,7 +15,7 @@
     position: fixed;
     background-color: rgba(0, 0, 0, 0.85);
     box-shadow: 4px 4px 8px -4px #000;
-    width: 50rem;
+    width: 30rem;
     max-height: 80vh;
     display: flex;
     flex-direction: column;
@@ -55,6 +55,9 @@
 
 h2 {
     text-transform: uppercase;
+    width: 100%;
+    text-align: center;
+    margin: 0;
 }
 
 ul {
@@ -62,20 +65,27 @@ ul {
 }
 
 .list {
-    border: 2px solid #ddd;
+    width: 100%;
     margin: 1rem;
     padding: 1rem;
-    width: 100%;
-    text-align: center;
+    padding-top: 0;
+    text-align: left;
     text-transform: capitalize;
     font-size: 1.5rem;
     color: #ddd;
+    overflow-y: scroll;
+}
+
+li {
+    padding: 0.5rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border-top: 1px solid #ddd;
 }
 
 li:hover {
-    transition: all 0.1s;
-    color: black;
+    transition: all 0.08s ease-in-out;
+    color: #F7C300;
     cursor: pointer;
-    background-color: #ddd;
-    border-radius: 5px;
 }
