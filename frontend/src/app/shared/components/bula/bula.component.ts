@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
 import { Bula } from '../../models/Bula.model';
 import { ApiConstantsService } from '../../constants/api-constants.service';
 import { HttpClient } from '@angular/common/http';
@@ -9,17 +9,34 @@ import { Token } from '@angular/compiler';
   templateUrl: './bula.component.html',
   styleUrls: ['./bula.component.css']
 })
-export class BulaComponent implements OnInit {
+export class BulaComponent implements OnInit, AfterViewInit {
   @Input() bula: Bula;
 
   public isBulaMeowed: boolean = false;
   public isBulaRebuled: boolean = false;
+  public animateOnLoad: boolean = false;
+  public isBulaPanelOpen: boolean = false;
+  public bulaPanelType: string = "";
 
   constructor(private http: HttpClient, private apiConstantsService: ApiConstantsService) { }
 
   ngOnInit(): void {
     this.isBulaMeowed = this.bula.meows.includes(this.getUserId());
     this.isBulaRebuled = this.bula.rebulas.includes(this.getUserId());
+  }
+
+  ngAfterViewInit(): void {
+      this.animateOnLoad = true;
+  }
+
+  public openBulaPanel(type: string) {
+    if(type == "Meows" && this.bula.meows.length == 0 || type == "Rebulas" && this.bula.rebulas.length == 0) {
+      return;
+    }
+    else {
+      this.bulaPanelType = type
+      this.isBulaPanelOpen = true;
+    }
   }
 
   public onMeowBtnClicked() {
