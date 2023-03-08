@@ -2,13 +2,11 @@
     <div class="container">
         <h1>Topics</h1>
         <button class="close" (click)="closeComponentCreateBula()"><img class="close-logo" src="/assets/close.svg" /></button>
-        <table>
-            <tbody>
-                <tr *ngFor="let topic of topics">
-                    <td class="topic-name">{{topic['hashtag']}}</td>
-                    <td class="topic-number">({{topic['number']}} bulas)</td>
-                </tr>
-            </tbody>
-        </table>
+        <ul>
+            <li *ngFor="let topic of topics">
+                <span class="topic-name">{{topic['hashtag']}}</span>
+                <span class="topic-number">({{topic['number']}} bulas)</span>
+            </li>
+        </ul>
     </div>
 </div>
