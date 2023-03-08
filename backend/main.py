@@ -75,6 +75,25 @@ def meow():
         BulaService.meow(userId=userId, bulaId=bulaId)
         return Response(status=200)
     abort(400) 
+    
+@app.route('/bula/unrebula', methods=['POST'])
+def unrebulaRoute():
+    if request.method == 'POST':
+        userId = request.headers.get('Authorization').split('/')[1]
+        bulaId = request.form.get("bulaId")
+        BulaService.unrebula(userId=userId, bulaId=bulaId)
+        return Response(status=200)
+    abort(400)
+
+
+@app.route('/bula/unmeow', methods=['POST'])
+def unmeow():
+    if request.method == 'POST':
+        userId = request.headers.get('Authorization').split('/')[1]
+        bulaId = request.form.get("bulaId")
+        BulaService.unmeow(userId=userId, bulaId=bulaId)
+        return Response(status=200)
+    abort(400) 
 
 
 @app.route('/bula/hashtag', methods=['GET'])
