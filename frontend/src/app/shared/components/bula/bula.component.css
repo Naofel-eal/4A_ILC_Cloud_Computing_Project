@@ -59,6 +59,20 @@ p {
     font-size: 1.5rem;
 }
 
+.date {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    text-align: right;
+    padding-right: 1rem;
+}
+
+.date p {
+    width: 100%;
+    color: #DDD;
+    font-size: 1rem;
+}
+
 .meowsNumber, .rebulasNumber {
     color: #47A7FF;
 }

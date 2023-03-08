@@ -19,6 +19,7 @@ import { CreateBulaComponent } from './shared/components/create-bula/create-bula
 import {AutosizeModule} from 'ngx-autosize';
 import { RequestInterceptor } from './interceptors/request.interceptor';
 import { AuthGuard } from './guards/auth.guard';
+import { BulaPanelComponent } from './shared/components/bula/bula.panel/bula.panel.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { AuthGuard } from './guards/auth.guard';
     BulaContentFormatterDirective,
     BulasCarouselComponent,
     CreateBulaComponent,
+    BulaPanelComponent,
   ],
   imports: [
     BrowserModule,

@@ -41,7 +41,7 @@ input {
     color: #fff;
 }
 
-img {
+img, .prevent-select {
     -webkit-user-drag: none;
     user-select: none;
     -moz-user-select: none;

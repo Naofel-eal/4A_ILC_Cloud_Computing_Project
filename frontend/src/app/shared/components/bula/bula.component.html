@@ -6,10 +6,13 @@
         <div class="bulaInfos">
             <div class="user">
                 <img  class='image bulaImg' src="/assets/bula.svg" alt="Bula-logo"/>
-                <p class="clickable authorText">{{bula.author}}</p>
+                <p class="clickable authorText prevent-select">{{bula.author}}</p>
             </div>
-            <p class="clickable meowsText"><span class="meowsNumber">{{bula.meows.length}}</span> meows</p>
-            <p class="clickable rebulaText"><span class="rebulasNumber">{{bula.rebulas.length}}</span> rebulas</p>
+            <p class="clickable meowsText prevent-select" (click)="openBulaPanel('Meows')"><span class="meowsNumber">{{bula.meows.length}}</span> meows</p>
+            <p class="clickable rebulaText prevent-select" (click)="openBulaPanel('Rebulas')"><span class="rebulasNumber">{{bula.rebulas.length}}</span> rebulas</p>
+        </div>
+        <div  class="date">
+            <p>{{bula.date.substring(0, bula.date.length-3)}}</p>
         </div>
         <div class="actionBtns">
             <img  
@@ -28,4 +31,10 @@
                 />
         </div>
     </div>
+    <app-bula-panel 
+        *ngIf="this.isBulaPanelOpen"
+        [bula]="this.bula"
+        [type]="this.bulaPanelType"
+        (closeComponent)="this.isBulaPanelOpen = false"
+    ></app-bula-panel>
 </div>
