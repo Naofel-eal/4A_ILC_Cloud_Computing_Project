@@ -11,5 +11,5 @@
     <img  class='logout' src="/assets/navbar/logout.svg" alt="logout-logo" routerLink="/login" (click)="clearToken()" />
 </div>
 
-<app-create-bula *ngIf="isCreateBulaVisible" (closeComponent)="isCreateBulaVisible = $event"></app-create-bula>
-<app-topics *ngIf="isTopicsVisible" (closeComponent)="isTopicsVisible = $event"></app-topics>
+<app-create-bula *ngIf="isCreateBulaVisible" (closeComponent)="isCreateBulaVisible = false"></app-create-bula>
+<app-topics *ngIf="isTopicsVisible" (closeComponent)="isTopicsVisible = false"></app-topics>

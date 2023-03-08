@@ -32,7 +32,7 @@ export class CreateBulaComponent {
 
     this.http.post(this.apiConstantsService.API_URL_BULA_POST_BULA, formData).subscribe({      
       next : (response : any) => {
-        this.closeComponent.emit(true)
+        this.closeComponentCreateBula();
       },
 
       error : (error) => {
