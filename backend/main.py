@@ -75,7 +75,8 @@ def meow():
         BulaService.meow(userId=userId, bulaId=bulaId)
         return Response(status=200)
     abort(400) 
-    
+
+
 @app.route('/bula/unrebula', methods=['POST'])
 def unrebulaRoute():
     if request.method == 'POST':
