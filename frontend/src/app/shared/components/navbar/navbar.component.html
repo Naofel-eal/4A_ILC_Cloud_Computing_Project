@@ -1,12 +1,15 @@
 <div class="container">
-    <img  class='bula' src="/assets/bula.svg" alt="Bula-logo" (click)="send_create_bula_clicked()"/>
+    <img  class='bula' src="/assets/bula.svg" alt="Bula-logo" (click)="isCreateBulaVisible = !isCreateBulaVisible" />
 
     <div class="logo-container">
         <img  class='logo' src="/assets/navbar/home.svg" alt="home-logo" routerLink="/home"/>
         <img  class='logo' src="/assets/navbar/search.svg" alt="search-logo"/>
-        <img  class='logo' src="/assets/navbar/trends.svg" alt="trends-logo"/>
+        <img  class='logo' src="/assets/navbar/trends.svg" alt="trends-logo" (click)="isTopicsVisible= !isTopicsVisible" />
         <img  class='logo' src="/assets/navbar/profile.svg" alt="profile-logo"/>
     </div>
     
     <img  class='logout' src="/assets/navbar/logout.svg" alt="logout-logo" routerLink="/login" (click)="clearToken()" />
 </div>
+
+<app-create-bula *ngIf="isCreateBulaVisible" (closeComponent)="isCreateBulaVisible = $event"></app-create-bula>
+<app-topics *ngIf="isTopicsVisible" (closeComponent)="isTopicsVisible = $event"></app-topics>
