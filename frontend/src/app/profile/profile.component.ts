@@ -24,6 +24,5 @@ export class ProfileComponent {
 
   ngOnInit(): void {
     this.bulaService.loadUserBulas(this.userId);
-    console.log(this.userId)
   }
 }
