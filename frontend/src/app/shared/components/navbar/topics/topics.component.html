@@ -4,7 +4,7 @@
         <button class="close" (click)="closeComponentCreateBula()"><img class="close-logo" src="/assets/close.svg" /></button>
         <ul>
             <li *ngFor="let topic of topics">
-                <span class="topic-name">{{topic['hashtag']}}</span>
+                <span class="topic-name" (click)="onClickTopic(topic['hashtag'])">{{topic['hashtag']}}</span>
                 <span class="topic-number">({{topic['number']}} bulas)</span>
             </li>
         </ul>
