@@ -13,7 +13,7 @@ def beforeRequest():
     if request.method == 'OPTIONS':
         return Response(status=200)
     
-    if request.path not in ['/', '/user/login', '/user/register', '/load']:
+    if request.path not in ['/', '/user/login', '/user/register', '/load', '/reset']:
         if request.headers.get('Authorization') == None:
             abort(400)
         else:
@@ -136,6 +136,14 @@ def loadData():
         RedisService.load()
         return Response(status=200)
     abort(400)
+    
+@app.route('/reset', methods=['POST'])
+def resetDatabase():
+    UserService.usersDB.flushdb()
+    UserService.tokensDB.flushdb()
+    BulaService.bulasDB.flushdb()
+    BulaService.hashtagDB.flushdb()
+    return Response(status=200)
 
 
 if __name__ == '__main__':
