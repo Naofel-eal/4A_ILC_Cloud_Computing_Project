@@ -8,14 +8,12 @@ import { HomeService } from 'src/app/shared/dependencies/home.service';
   selector: 'app-create-bula',
   templateUrl: './create-bula.component.html',
   styleUrls: ['./create-bula.component.css'],
-  providers: [HomeService]
 })
 export class CreateBulaComponent {
 
   constructor(private http: HttpClient, private apiConstantsService: ApiConstantsService, private homeService: HomeService) { }
   public bulaText = '';
   public nbCharacters = 0;
-  private linesLimit: number = 6;
 
   @Output() closeComponent = new EventEmitter<boolean>();
 
@@ -35,6 +33,7 @@ export class CreateBulaComponent {
     this.http.post(this.apiConstantsService.API_URL_BULA_POST_BULA, formData).subscribe({      
       next : (response : any) => {
         this.homeService.loadAllBulas();
+        this.homeService.bulasSubject.next(this.homeService.bulas);
         this.closeComponentCreateBula();
       },
 
