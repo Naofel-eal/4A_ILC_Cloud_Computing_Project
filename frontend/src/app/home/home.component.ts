@@ -14,21 +14,8 @@ export class HomeComponent implements OnInit{
   constructor(private http: HttpClient, private apiConstantsService: ApiConstantsService, public homeService: HomeService) { }
   
   public bulas: Bula[] = []
-  public isCreateBulaVisible = false;
-  public isTopicsVisible = false;
 
   ngOnInit(): void {
     this.homeService.loadAllBulas();
-  }
-
-  public close_create_bula(isBulaPosted: boolean) {
-    this.isCreateBulaVisible = false;
-    if(isBulaPosted) {
-      this.homeService.loadAllBulas();
-    }
-  }
-
-  public switch_create_bula_visibility() {
-    this.isCreateBulaVisible = !this.isCreateBulaVisible;
   }
 }

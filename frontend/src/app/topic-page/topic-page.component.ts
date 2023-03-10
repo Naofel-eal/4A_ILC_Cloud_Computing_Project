@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Bula } from '../shared/models/Bula.model';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { ApiConstantsService } from '../shared/constants/api-constants.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-topic-page',
@@ -9,30 +10,24 @@ import { ApiConstantsService } from '../shared/constants/api-constants.service';
   styleUrls: ['./topic-page.component.css']
 })
 export class TopicPageComponent implements OnInit {
+
+  constructor(private http: HttpClient, private apiConstantsService: ApiConstantsService, private route: ActivatedRoute) { }
   
-  constructor(private http: HttpClient, private apiConstantsService: ApiConstantsService) { }
-  
+  public hashtag = '';
   public bulas: Bula[] = []
-  public isCreateBulaVisible = false;
-  public isTopicsVisible = false;
 
   ngOnInit(): void {
-    this.loadAllBulas();
-  }
-
-  public close_create_bula(isBulaPosted: boolean) {
-    this.isCreateBulaVisible = false;
-    if(isBulaPosted) {
+    this.route.paramMap.subscribe((params) => {
+      this.hashtag = ""+params.get('hashtag');
       this.loadAllBulas();
-    }
-  }
-
-  public switch_create_bula_visibility() {
-    this.isCreateBulaVisible = !this.isCreateBulaVisible;
+    });
   }
 
   public loadAllBulas() {
-    this.http.get(this.apiConstantsService.API_URL_BULA_ALL_BULAS).subscribe({
+    let queryParams = new HttpParams();
+    queryParams = queryParams.append("hashtagId", this.hashtag);
+
+    this.http.get(this.apiConstantsService.API_URL_BULA_HASHTAG, {params:queryParams}).subscribe({
       next : (response : any) => {
         this.bulas = []
         for (let bula of response['bulas']) {
