@@ -21,6 +21,7 @@ import { RequestInterceptor } from './interceptors/request.interceptor';
 import { AuthGuard } from './guards/auth.guard';
 import { TopicsComponent } from './shared/components/navbar/topics/topics.component';
 import { BulaPanelComponent } from './shared/components/bula/bula.panel/bula.panel.component';
+import { TopicPageComponent } from './topic-page/topic-page.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { BulaPanelComponent } from './shared/components/bula/bula.panel/bula.pan
     CreateBulaComponent,
     TopicsComponent,
     BulaPanelComponent,
+    TopicPageComponent,
   ],
   imports: [
     BrowserModule,

@@ -73,7 +73,7 @@ ul {
     text-transform: capitalize;
     font-size: 1.5rem;
     color: #ddd;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 li {

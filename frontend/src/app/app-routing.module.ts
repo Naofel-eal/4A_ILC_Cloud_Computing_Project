@@ -4,8 +4,8 @@ import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
-import { BulasCarouselComponent } from './shared/components/bulas-carousel/bulas-carousel.component';
 import { AuthGuard } from './guards/auth.guard';
+import { TopicPageComponent } from './topic-page/topic-page.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -13,7 +13,7 @@ const routes: Routes = [
   { path: 'register', title: "Bula - Sign up", component: RegisterComponent, canActivate: [AuthGuard] },
   { path: 'login', title: "Bula - Sign in", component: LoginComponent, canActivate: [AuthGuard] },
   { path: 'profile/:userId', title: "Bula - Profile", component: ProfileComponent, canActivate: [AuthGuard] },
-  { path: 'test', component: BulasCarouselComponent}
+  { path: 'topic/:hashtag', component: TopicPageComponent }
 ];
 
 @NgModule({

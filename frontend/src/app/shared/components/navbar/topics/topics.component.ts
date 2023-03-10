@@ -1,5 +1,6 @@
 import { Component, EventEmitter, HostListener, OnInit, Output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 import { ApiConstantsService } from '../../../constants/api-constants.service';
 
 @Component({
@@ -11,7 +12,7 @@ export class TopicsComponent implements OnInit {
 
   public topics: any[] = [];
 
-  constructor(private http: HttpClient, private apiConstantsService: ApiConstantsService) { }
+  constructor(private http: HttpClient, private router: Router, private apiConstantsService: ApiConstantsService) { }
 
   @Output() closeComponent = new EventEmitter<boolean>();
 
@@ -35,6 +36,10 @@ export class TopicsComponent implements OnInit {
         console.log("error", error.status)
       }
     });
+  }
+
+  public onClickTopic(hashtag : string) {
+    this.router.navigate(['/topic', hashtag]);
   }
 
 }

@@ -1,0 +1,9 @@
+<div class="container">
+    <app-navbar></app-navbar>
+    <div class="bulaContainer">
+      <app-bula
+        *ngFor="let bula of bulas"
+        [bula]="bula"
+      ></app-bula>
+    </div>
+</div>

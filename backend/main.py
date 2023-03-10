@@ -100,7 +100,7 @@ def unmeow():
 @app.route('/bula/hashtag', methods=['GET'])
 def hashtagRoute():
     if request.method == 'GET':
-        hashtag = request.form.get("hashtagId")
+        hashtag = request.args.get("hashtagId")
         return BulaService.getBulasOfHashtag(hashtag=hashtag)
     abort(400)
 

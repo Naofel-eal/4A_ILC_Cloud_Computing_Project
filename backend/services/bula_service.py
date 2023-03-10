@@ -82,9 +82,12 @@ class BulaService:
         return hashtagsDictionnary
 
 
-    def getBulasOfHashtag(hashtag: str) -> str:
+    def getBulasOfHashtag(hashtag: str) -> dict:
         if(BulaService.hashtagDB.exists(hashtag)):
-            return json.loads(BulaService.hashtagDB.get(hashtag))
+            bulasDictionary: dict = {"bulas": []}
+            for bula in json.loads(BulaService.hashtagDB.get(hashtag))['bulas']:
+                bulasDictionary['bulas'].append(BulaService.jsonifyBula(bulaID=bula))
+            return bulasDictionary
         else:
             return Utils.returnError("hashtag doesn't exist.")
     
