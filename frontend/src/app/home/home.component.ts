@@ -8,10 +8,13 @@ import { HomeService } from '../shared/dependencies/home.service';
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  providers: [HomeService]
 })
 export class HomeComponent implements OnInit{
-  constructor(private http: HttpClient, private apiConstantsService: ApiConstantsService, public homeService: HomeService) { }
+  constructor(private http: HttpClient, private apiConstantsService: ApiConstantsService, public homeService: HomeService) { 
+    this.homeService.getBulas().subscribe((bulas) => {
+      this.bulas = bulas;
+    });
+  }
   
   public bulas: Bula[] = []
   public isCreateBulaVisible = false;
