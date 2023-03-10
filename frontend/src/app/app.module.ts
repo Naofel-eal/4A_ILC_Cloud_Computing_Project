@@ -15,11 +15,11 @@ import { BackgroundComponent } from './shared/components/background/background.c
 import { TrendComponent } from './home/trend/trend.component';
 import { BulaContentFormatterDirective } from './shared/directives/bula-content-formatter.directive';
 import { BulasCarouselComponent } from './shared/components/bulas-carousel/bulas-carousel.component';
-import { CreateBulaComponent } from './shared/components/create-bula/create-bula.component';
+import { CreateBulaComponent } from './shared/components/navbar/create-bula/create-bula.component';
 import {AutosizeModule} from 'ngx-autosize';
 import { RequestInterceptor } from './interceptors/request.interceptor';
 import { AuthGuard } from './guards/auth.guard';
-import { TopicsComponent } from './shared/components/topics/topics.component';
+import { TopicsComponent } from './shared/components/navbar/topics/topics.component';
 import { BulaPanelComponent } from './shared/components/bula/bula.panel/bula.panel.component';
 
 @NgModule({

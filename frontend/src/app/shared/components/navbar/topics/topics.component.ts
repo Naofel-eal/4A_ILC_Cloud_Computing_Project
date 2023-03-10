@@ -1,6 +1,6 @@
 import { Component, EventEmitter, HostListener, OnInit, Output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ApiConstantsService } from '../../constants/api-constants.service';
+import { ApiConstantsService } from '../../../constants/api-constants.service';
 
 @Component({
   selector: 'app-topics',
