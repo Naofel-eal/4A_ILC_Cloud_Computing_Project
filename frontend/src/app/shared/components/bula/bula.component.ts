@@ -2,7 +2,7 @@ import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
 import { Bula } from '../../models/Bula.model';
 import { ApiConstantsService } from '../../constants/api-constants.service';
 import { HttpClient } from '@angular/common/http';
-import { Token } from '@angular/compiler';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-bula',
@@ -18,7 +18,7 @@ export class BulaComponent implements OnInit, AfterViewInit {
   public isBulaPanelOpen: boolean = false;
   public bulaPanelType: string = "";
 
-  constructor(private http: HttpClient, private apiConstantsService: ApiConstantsService) { }
+  constructor(private http: HttpClient, private apiConstantsService: ApiConstantsService, private router: Router) { }
 
   ngOnInit(): void {
     this.isBulaMeowed = this.bula.meows.includes(this.getUserId());
@@ -118,5 +118,9 @@ export class BulaComponent implements OnInit, AfterViewInit {
   public getUserId(): string {
     const token: string = localStorage.getItem("token")!
     return token.split("/")[1]
+  }
+
+  public onUserClicked() {
+    this.router.navigate(['/profile', this.bula.author]);
   }
 }

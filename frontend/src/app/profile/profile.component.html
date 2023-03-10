@@ -1,4 +1,12 @@
 <div class="container">
-    <h1>{{userId}}</h1>
-    <p *ngFor="let bula of bulas">{{bula.text}}</p>
+  <h1>{{userId}}</h1>
+  <div class="content-container">
+    <app-navbar></app-navbar>
+    <div class="bulaContainer">
+      <app-bula
+        *ngFor="let bula of bulas"
+        [bula]="bula"
+      ></app-bula>
+    </div>
+  </div>
 </div>
