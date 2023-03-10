@@ -41,5 +41,4 @@ export class TopicsComponent implements OnInit {
   public onClickTopic(hashtag : string) {
     this.router.navigate(['/topic', hashtag]);
   }
-
 }

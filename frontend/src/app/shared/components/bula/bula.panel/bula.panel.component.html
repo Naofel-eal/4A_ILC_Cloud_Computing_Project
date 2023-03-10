@@ -1,10 +1,17 @@
 <div class="background">
     <div class="container">
         <h2>{{type}} list</h2>
-        <button class="close" (click)="closeComponentCreateBula()"><img class="close-logo" src="/assets/close.svg" /></button>
+        <button class="close" (click)="closeComponentCreateBula()">
+            <img class="close-logo" src="/assets/close.svg" />
+        </button>
         <div class="list">
             <ul>
-                <li class="prevent-select" *ngFor="let user of data">{{user}}</li>
+                <li 
+                    class="prevent-select" 
+                    *ngFor="let user of data"
+                    (click)="onClickProfile(bula.author)">
+                    {{user}}
+                </li>
             </ul>
         </div>
     </div>

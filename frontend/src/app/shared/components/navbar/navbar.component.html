@@ -5,7 +5,7 @@
         <img  class='logo' src="/assets/navbar/home.svg" alt="home-logo" routerLink="/home"/>
         <img  class='logo' src="/assets/navbar/search.svg" alt="search-logo"/>
         <img  class='logo' src="/assets/navbar/trends.svg" alt="trends-logo" (click)="isTopicsVisible= !isTopicsVisible" />
-        <img  class='logo' src="/assets/navbar/profile.svg" alt="profile-logo"/>
+        <img  class='logo' src="/assets/navbar/profile.svg" alt="profile-logo" (click)="onProfileClick()"/>
     </div>
     
     <img  class='logout' src="/assets/navbar/logout.svg" alt="logout-logo" routerLink="/login" (click)="clearToken()" />

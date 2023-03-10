@@ -1,12 +1,13 @@
 import { Directive, ElementRef, Renderer2, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Directive({
   selector: '[appBulaContentFormatter]'
 })
 export class BulaContentFormatterDirective implements OnChanges {
   @Input() bulaText: string;
-
-  constructor(private el: ElementRef, private renderer: Renderer2) { }
+  
+  constructor(private el: ElementRef, private renderer: Renderer2, private router: Router) { }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['bulaText'] && changes['bulaText'].currentValue) {
@@ -28,6 +29,9 @@ export class BulaContentFormatterDirective implements OnChanges {
         fragment.appendChild(document.createTextNode(rest));
         span.style.color = '#F7C300';
         span.style.cursor = 'pointer';
+        span.onclick = () => {
+          this.router.navigate(['/topic', '#' + word]);
+        };
       } else {
         fragment.appendChild(document.createTextNode(parts[i]));
       }
