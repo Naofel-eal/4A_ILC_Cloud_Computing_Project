@@ -1,8 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Output, HostListener } from '@angular/core';
-import { Router } from '@angular/router';
 import { ApiConstantsService } from '../../../constants/api-constants.service';
-import { HomeService } from 'src/app/shared/dependencies/home.service';
+import { BulaService } from 'src/app/shared/dependencies/bula.service';
 
 @Component({
   selector: 'app-create-bula',
@@ -11,7 +10,7 @@ import { HomeService } from 'src/app/shared/dependencies/home.service';
 })
 export class CreateBulaComponent {
 
-  constructor(private http: HttpClient, private apiConstantsService: ApiConstantsService, private homeService: HomeService) { }
+  constructor(private http: HttpClient, private apiConstantsService: ApiConstantsService, private bulaService: BulaService) { }
   public bulaText = '';
   public nbCharacters = 0;
 
@@ -32,8 +31,8 @@ export class CreateBulaComponent {
 
     this.http.post(this.apiConstantsService.API_URL_BULA_POST_BULA, formData).subscribe({      
       next : (response : any) => {
-        this.homeService.loadAllBulas();
-        this.homeService.bulasSubject.next(this.homeService.bulas);
+        this.bulaService.loadAllBulas();
+        this.bulaService.allBulasSubject.next(this.bulaService.allBulas);
         this.closeComponentCreateBula();
       },
 

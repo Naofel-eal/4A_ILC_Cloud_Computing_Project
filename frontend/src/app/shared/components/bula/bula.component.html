@@ -6,7 +6,7 @@
         <div class="bulaInfos">
             <div class="user">
                 <img  class='image bulaImg' src="/assets/bula.svg" alt="Bula-logo"/>
-                <p class="clickable authorText prevent-select">{{bula.author}}</p>
+                <p class="clickable authorText prevent-select" (click)="onUserClicked()">{{bula.author}}</p>
             </div>
             <p class="clickable meowsText prevent-select" (click)="openBulaPanel('Meows')"><span class="meowsNumber">{{bula.meows.length}}</span> meows</p>
             <p class="clickable rebulaText prevent-select" (click)="openBulaPanel('Rebulas')"><span class="rebulasNumber">{{bula.rebulas.length}}</span> rebulas</p>

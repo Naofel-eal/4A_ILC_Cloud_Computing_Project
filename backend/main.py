@@ -42,7 +42,7 @@ def allBulasRoute():
 @app.route('/bula/user-bulas', methods=['GET'])
 def userBulasRoute():
     if request.method == 'GET':
-        userId = request.form.get("userId")
+        userId = request.args.get("userId")
         return BulaService.getBulasOfUser(userId=userId)
     abort(400)
 

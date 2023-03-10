@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Bula } from '../shared/models/Bula.model';
 import { HttpClient } from '@angular/common/http';
 import { ApiConstantsService } from '../shared/constants/api-constants.service';
-import { HomeService } from '../shared/dependencies/home.service';
+import { BulaService } from '../shared/dependencies/bula.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -10,15 +11,15 @@ import { HomeService } from '../shared/dependencies/home.service';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit{
-  constructor(private http: HttpClient, private apiConstantsService: ApiConstantsService, public homeService: HomeService) { 
-    this.homeService.getBulas().subscribe((bulas) => {
+  public bulas: Bula[];
+
+  constructor(public bulaService: BulaService) { 
+    this.bulaService.getAllBulas().subscribe((bulas) => {
       this.bulas = bulas;
     });
   }
-  
-  public bulas: Bula[] = []
 
   ngOnInit(): void {
-    this.homeService.loadAllBulas();
+    this.bulaService.loadAllBulas();
   }
 }
