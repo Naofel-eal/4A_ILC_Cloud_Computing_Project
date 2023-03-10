@@ -23,7 +23,6 @@
     align-items: center;
     padding: 1rem;
     border-radius: 15px;
-    overflow-y: auto;
 }
 
 h1 {
@@ -65,7 +64,9 @@ ul {
     border-spacing: 0;
     border-radius: 15px;
     margin: 1rem 0;
+    padding: 0 1rem;
     list-style: none;
+    overflow-y: scroll;
 }
 
 li {
