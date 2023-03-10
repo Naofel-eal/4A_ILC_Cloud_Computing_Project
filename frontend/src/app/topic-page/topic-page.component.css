@@ -1,0 +1,18 @@
+.container {
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+app-navbar {
+    margin-left: 1rem;
+    width: 25%;
+}
+
+.bulaContainer {
+    padding: 1rem 0px;
+    height: 100vh;
+    margin: 0 auto;
+}
