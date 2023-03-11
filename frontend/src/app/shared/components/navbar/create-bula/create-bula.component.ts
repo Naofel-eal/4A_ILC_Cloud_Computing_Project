@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Output, HostListener } from '@angular/core';
 import { ApiConstantsService } from '../../../constants/api-constants.service';
 import { BulaService } from 'src/app/shared/dependencies/bula.service';
+import { TopicService } from 'src/app/shared/dependencies/topic.service';
 
 @Component({
   selector: 'app-create-bula',
@@ -10,9 +11,15 @@ import { BulaService } from 'src/app/shared/dependencies/bula.service';
 })
 export class CreateBulaComponent {
 
-  constructor(private http: HttpClient, private apiConstantsService: ApiConstantsService, private bulaService: BulaService) { }
   public bulaText = '';
   public nbCharacters = 0;
+
+  constructor (
+    private http: HttpClient, 
+    private apiConstantsService: ApiConstantsService, 
+    private bulaService: BulaService, 
+    private topicService : TopicService, 
+  ) { }
 
   @Output() closeComponent = new EventEmitter<boolean>();
 
@@ -32,7 +39,8 @@ export class CreateBulaComponent {
     this.http.post(this.apiConstantsService.API_URL_BULA_POST_BULA, formData).subscribe({      
       next : (response : any) => {
         this.bulaService.loadAllBulas();
-        this.bulaService.allBulasSubject.next(this.bulaService.allBulas);
+        this.bulaService.loadUserBulas(localStorage.getItem("token")!.split('/')[1]);
+        this.topicService.loadTopics();
         this.closeComponentCreateBula();
       },
 
@@ -44,7 +52,7 @@ export class CreateBulaComponent {
 
   public checkText(event: any) {
     if (event.inputType === "insertLineBreak") {
-      this.bulaText = this.bulaText.replace(/\n/g, " ");
+      this.bula();
     }
     this.nbCharacters = this.bulaText.length;
   }

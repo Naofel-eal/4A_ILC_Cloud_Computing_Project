@@ -1,7 +1,6 @@
 import { Component, EventEmitter, HostListener, OnInit, Output } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { ApiConstantsService } from '../../../constants/api-constants.service';
+import { TopicService } from 'src/app/shared/dependencies/topic.service';
 
 @Component({
   selector: 'app-topics',
@@ -10,35 +9,31 @@ import { ApiConstantsService } from '../../../constants/api-constants.service';
 })
 export class TopicsComponent implements OnInit {
 
-  public topics: any[] = [];
-
-  constructor(private http: HttpClient, private router: Router, private apiConstantsService: ApiConstantsService) { }
-
+  public topics: any[];
   @Output() closeComponent = new EventEmitter<boolean>();
 
-  public closeComponentCreateBula() {
+  constructor(private router: Router, public topicService: TopicService) {
+    this.topicService.getAllTopics().subscribe((topics) => {
+      this.topics = topics;
+    });
+  }
+
+  ngOnInit(): void {
+    this.topicService.loadTopics();
+  }
+
+  public closeComponentTopics() {
     this.closeComponent.emit(false);
   }
 
   @HostListener('document:keydown.escape', ['$event'])
   onKeydownHandler(event: KeyboardEvent) {
-    this.closeComponentCreateBula();
-  }
-
-  ngOnInit(): void {
-    this.http.get(this.apiConstantsService.API_URL_BULA_ALL_HASHTAG).subscribe({
-      next : (response : any) => {
-        for (let topic of response['hashtags']) {
-          this.topics.push({'hashtag': topic['hashtag'], 'number': topic['number']});
-        }
-      },
-      error : (error) => {
-        console.log("error", error.status)
-      }
-    });
+    this.closeComponentTopics();
   }
 
   public onClickTopic(hashtag : string) {
     this.router.navigate(['/topic', hashtag]);
+    this.closeComponent.emit(false);
   }
+
 }
