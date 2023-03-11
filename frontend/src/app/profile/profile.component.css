@@ -5,10 +5,15 @@
     flex-direction: row;
 }
 
+.bulaContainer {
+    padding-bottom: 1rem;
+    margin: 0 auto;
+}
+
 h1 {
     text-align: center;
-    padding: 3rem;
-    font-size: 2.5rem;
+    margin: 2rem 0;
+    font-size: 3rem;
     text-transform: uppercase;
     color: white;
     text-shadow: #000 1px 0 3px;
@@ -16,11 +21,4 @@ h1 {
 
 app-navbar {
     margin-left: 1rem;
-    width: 25%;
-}
-
-.bulaContainer {
-    padding: 1rem 0px;
-    width: 75%;
-    margin: 0 auto;
 }

@@ -11,7 +11,7 @@ app-navbar {
 }
 
 .bulaContainer {
-    padding: 1rem 0px;
+    padding-bottom: 1rem;
     margin: 0 auto;
 }
 
@@ -24,8 +24,8 @@ app-trend {
 
 h1 {
     text-align: center;
-    padding: 3rem;
-    font-size: 2.5rem;
+    margin: 2rem 0;
+    font-size: 3rem;
     text-transform: uppercase;
     color: white;
     text-shadow: #000 1px 0 3px;
