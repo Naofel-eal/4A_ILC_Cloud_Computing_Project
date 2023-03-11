@@ -37,7 +37,7 @@
     transition: transform 0.1s ease-in;
 }
 
-.close-logo:hover {
+.close:hover .close-logo {
     transform: rotate(90deg);
 }
 
