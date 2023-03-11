@@ -19,13 +19,13 @@ export class BulaPanelComponent implements OnInit{
     this.data = this.type == 'Meows' ? this.bula.meows : this.bula.rebulas;
   }
 
-  public closeComponentCreateBula() {
+  public closeComponentList() {
     this.closeComponent.emit(false);
   }
 
   @HostListener('document:keydown.escape', ['$event'])
   onKeydownHandler(event: KeyboardEvent) {
-    this.closeComponentCreateBula();
+    this.closeComponentList();
   }
 
   public onUserClicked() {
