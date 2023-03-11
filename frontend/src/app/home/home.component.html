@@ -1,13 +1,11 @@
-<div class="container">
-  <h1>Home</h1>
-  <div class="content-container">
-    <app-navbar></app-navbar>
-    <div class="bulaContainer">
-      <app-bula
-        *ngFor="let bula of bulas"
-        [bula]="bula"
-      ></app-bula>
-    </div>
-    <app-trend></app-trend>
+<div class="content-container">
+  <app-navbar></app-navbar>
+  <div class="bulaContainer">
+    <h1>Home</h1>
+    <app-bula
+      *ngFor="let bula of bulas"
+      [bula]="bula"
+    ></app-bula>
   </div>
+  <app-trend></app-trend>
 </div>

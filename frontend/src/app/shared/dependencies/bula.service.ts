@@ -14,20 +14,20 @@ export class BulaService {
     public userBulasSubject: BehaviorSubject<Bula[]> = new BehaviorSubject<Bula[]>([]);
 
     public loadAllBulas() {
-    this.http.get(this.apiConstantsService.API_URL_BULA_ALL_BULAS).subscribe({
-      next : (response : any) => {
-        this.allBulas = []
-        for (let bula of response['bulas']) {
-          this.allBulas.push(new Bula(bula['text'], bula['author'], bula['meows'], bula['rebulas'],  bula['date'], bula['id']))
+      this.http.get(this.apiConstantsService.API_URL_BULA_ALL_BULAS).subscribe({
+        next : (response : any) => {
+          this.allBulas = []
+          for (let bula of response['bulas']) {
+            this.allBulas.push(new Bula(bula['text'], bula['author'], bula['meows'], bula['rebulas'],  bula['date'], bula['id']))
+          }
+          this.allBulas = this.sortBulasByDate(this.allBulas);
+          this.allBulasSubject.next(this.allBulas);
+        },
+        error : (error) => {
+          console.log("error", error.status)
         }
-        this.allBulas = this.sortBulasByDate(this.allBulas);
-        this.allBulasSubject.next(this.allBulas);
-      },
-      error : (error) => {
-        console.log("error", error.status)
-      }
-    });
-  }
+      });
+    }
 
   public sortBulasByDate(bulas: Bula[]): Bula[] {
     return bulas.sort((a: Bula, b: Bula) => {

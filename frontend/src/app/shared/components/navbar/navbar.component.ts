@@ -18,7 +18,7 @@ export class NavbarComponent {
   }
 
   public onProfileClick() {
-    let userId: string = localStorage.getItem("token")!.split('/')[1]
-    this.router.navigate(['/profile', userId])
+    let userId: string = localStorage.getItem("token")!.split('/')[1];
+    this.router.navigate(['/profile', userId]);
   }
 }
