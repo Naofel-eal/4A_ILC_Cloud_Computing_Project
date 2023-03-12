@@ -5,6 +5,7 @@
         <input type="text" class="searchBox" placeholder="Searched text..." (input)="onTextChanged($event)">
     </div>
     <div class="result">
+        <h2 *ngIf="users.length == 0 && bulas.length == 0">No results</h2>
         <div class="users" *ngIf="users.length != 0">
             <h2>USERS</h2>
             <hr>

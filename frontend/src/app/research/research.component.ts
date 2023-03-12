@@ -17,22 +17,28 @@ export class ResearchComponent {
 
   public onTextChanged(event: any) {
     const text: string = event.target.value;
-    let queryParams = new HttpParams();
-    queryParams = queryParams.append("text", text);
-
-    this.http.get(this.apiConstantsService.API_URL_BULA_RESEARCH, {params:queryParams}).subscribe({
-      next : (response : any) => {
-        this.users = response['users'];
-        this.bulas = [];
-        for (let bula of response['bulas']) {
-          this.bulas.push(new Bula(bula['text'], bula['author'], bula['meows'], bula['rebulas'],  bula['date'], bula['id']));
+    if(text != '') {
+      let queryParams = new HttpParams();
+      queryParams = queryParams.append("text", text);
+  
+      this.http.get(this.apiConstantsService.API_URL_BULA_RESEARCH, {params:queryParams}).subscribe({
+        next : (response : any) => {
+          this.users = response['users'];
+          this.bulas = [];
+          for (let bula of response['bulas']) {
+            this.bulas.push(new Bula(bula['text'], bula['author'], bula['meows'], bula['rebulas'],  bula['date'], bula['id']));
+          }
+          this.sortBulasByDate();
+        },
+        error : (error) => {
+          console.log("error", error.status)
         }
-        this.sortBulasByDate();
-      },
-      error : (error) => {
-        console.log("error", error.status)
-      }
-    });
+      });
+    }
+    else {
+      this.bulas = [];
+      this.users = [];
+    }
   }
 
   public sortBulasByDate() {
