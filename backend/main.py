@@ -128,6 +128,13 @@ def loginRoute():
         password = request.form['password']
         return UserService.login(username=username, password=password)
     abort(400)
+    
+@app.route('/bula/research', methods=['GET'])
+def researchRoute():
+    if request.method == 'GET':
+        searchedText = request.args.get('text')
+        return BulaService.search(searchedText)
+    abort(400)
 
 
 @app.route('/load', methods=['POST'])

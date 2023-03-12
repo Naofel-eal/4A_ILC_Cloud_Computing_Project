@@ -20,5 +20,5 @@ export class ApiConstantsService {
   readonly API_URL_BULA_UNMEOW = this.API_URL + '/bula/unmeow'
   readonly API_URL_BULA_HASHTAG = this.API_URL + '/bula/hashtag';
   readonly API_URL_BULA_ALL_HASHTAG = this.API_URL + '/bula/all-hashtags';
-
+  readonly API_URL_BULA_RESEARCH = this.API_URL + '/bula/research'
 }

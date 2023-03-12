@@ -113,6 +113,12 @@ class BulaService:
             user['bulas'].remove(bulaId)
         UserService.usersDB.set(userId, json.dumps(user))
         
+    def search(searchedText: str) -> dict:
+        result: dict = {}
+        result.update(BulaService.searchBulaInDB(searchedText=searchedText))
+        result.update(UserService.searchUsernameInDB(searchedText=searchedText))
+        return result
+        
     
     def jsonifyBula(bulaID) -> json:
         jsonBula = json.loads(BulaService.bulasDB.get(bulaID))                
@@ -132,3 +138,13 @@ class BulaService:
             if userID in bula["meows"]:
                 return True
         return False
+    
+    
+    def searchBulaInDB(searchedText: str) -> dict:
+        bulasList: dict = {"bulas" : []}
+        for bulaID in BulaService.bulasDB.scan_iter('*'):
+            bula: dict = BulaService.jsonifyBula(bulaID)
+            bulaText: str = bula['text']
+            if searchedText in bulaText:
+                bulasList['bulas'].append(bula)
+        return bulasList
