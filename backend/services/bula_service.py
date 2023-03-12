@@ -145,6 +145,6 @@ class BulaService:
         for bulaID in BulaService.bulasDB.scan_iter('*'):
             bula: dict = BulaService.jsonifyBula(bulaID)
             bulaText: str = bula['text']
-            if searchedText in bulaText:
+            if bulaText.lower().__contains__(searchedText):
                 bulasList['bulas'].append(bula)
         return bulasList

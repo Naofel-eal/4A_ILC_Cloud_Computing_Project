@@ -132,7 +132,7 @@ def loginRoute():
 @app.route('/bula/research', methods=['GET'])
 def researchRoute():
     if request.method == 'GET':
-        searchedText = request.args.get('text')
+        searchedText: str = request.args.get('text').lower()
         return BulaService.search(searchedText)
     abort(400)
 

@@ -4,7 +4,7 @@
         <h1>Research</h1>
         <input type="text" class="searchBox" placeholder="Searched text..." (input)="onTextChanged($event)">
     </div>
-    <div class="result" *ngIf="bulas.length != 0 && users.length != 0">
+    <div class="result" *ngIf="bulas.length != 0 || users.length != 0">
         <div class="users">
             <h2>USERS</h2>
             <hr>
