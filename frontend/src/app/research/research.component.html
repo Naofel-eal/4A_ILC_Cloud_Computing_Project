@@ -4,8 +4,9 @@
         <h1>Research</h1>
         <input type="text" class="searchBox" placeholder="Searched text..." (input)="onTextChanged($event)">
     </div>
-    <div class="result" *ngIf="bulas.length != 0 || users.length != 0">
-        <div class="users">
+    <div class="result">
+        <h2 *ngIf="users.length == 0 && bulas.length == 0">No results</h2>
+        <div class="users" *ngIf="users.length != 0">
             <h2>USERS</h2>
             <hr>
             <ul>
@@ -18,7 +19,7 @@
                 </li>
             </ul>
         </div>
-        <div class="bulas">
+        <div class="bulas" *ngIf="bulas.length != 0">
             <h2>BULAS</h2>
             <hr>
             <ul>
