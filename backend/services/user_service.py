@@ -74,6 +74,6 @@ class UserService:
     def searchUsernameInDB(searchedText: str) -> dict:
         users: dict = {"users": []}
         for username in UserService.usersDB.scan_iter('*'):
-            if searchedText in username:
+            if username.lower().__contains__(searchedText):
                 users['users'].append(username)
         return users
