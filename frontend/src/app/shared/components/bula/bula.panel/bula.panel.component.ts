@@ -28,10 +28,6 @@ export class BulaPanelComponent implements OnInit{
     this.closeComponentList();
   }
 
-  public onUserClicked() {
-    this.router.navigate(['/profile', this.bula.author]);
-  }
-
   public onClickProfile(userId: string) {
     this.router.navigate(['/profile', userId]);
   }

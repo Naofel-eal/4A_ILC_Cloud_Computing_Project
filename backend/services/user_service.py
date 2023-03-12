@@ -69,3 +69,11 @@ class UserService:
                 return False
         else:
             return False
+
+    
+    def searchUsernameInDB(searchedText: str) -> dict:
+        users: dict = {"users": []}
+        for username in UserService.usersDB.scan_iter('*'):
+            if searchedText in username:
+                users['users'].append(username)
+        return users

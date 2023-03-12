@@ -22,6 +22,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { TopicsComponent } from './shared/components/navbar/topics/topics.component';
 import { BulaPanelComponent } from './shared/components/bula/bula.panel/bula.panel.component';
 import { TopicPageComponent } from './topic-page/topic-page.component';
+import { ResearchComponent } from './research/research.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { TopicPageComponent } from './topic-page/topic-page.component';
     TopicsComponent,
     BulaPanelComponent,
     TopicPageComponent,
+    ResearchComponent,
   ],
   imports: [
     BrowserModule,

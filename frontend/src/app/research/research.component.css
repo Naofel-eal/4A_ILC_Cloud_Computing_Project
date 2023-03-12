@@ -1,0 +1,106 @@
+.container {
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.bulaContainer {
+    padding-bottom: 1rem;
+    margin: 0 auto;
+}
+
+.content {
+    width: 100%;
+    margin: 0;
+    padding:0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1, h2 {
+    text-align: center;
+    margin: 2rem 0;
+    font-size: 3rem;
+    text-transform: uppercase;
+    color: white;
+    text-shadow: #000 1px 0 3px;
+}
+
+app-navbar {
+    margin-left: 1rem;
+}
+
+.searchBox {
+    width: 60%;
+    height: 3rem;
+    padding: 1rem;
+    font-size: 1.2rem;
+    border-width: 1px;
+    border-color: #cccccc;
+    background-color: #f4f2f2;
+    color: #000000;
+    border-style: solid;
+    border-radius: 20px;
+    box-shadow: 0px 0px 5px rgba(66,66,66,.75);
+}
+
+.result {
+    margin: 2rem;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    padding: 0 5rem;
+    padding-top: 1rem;
+    justify-content: center;
+}
+
+.result > div {
+    height: 100%;
+    margin: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+}
+
+h2 {
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 2rem;
+    margin: 1rem;
+}
+
+.users {
+    width: 30%;
+}
+
+ul {
+    list-style: none;
+}
+
+.users li {
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: left;
+    list-style: none;
+    font-size: 2rem;
+    text-transform: capitalize;
+    margin: 0.5rem;
+    display: flex;
+    width: 100%;
+}
+
+.users li:hover {
+    color: #F7C300;
+    transition: 0.08s ease-in-out;
+}
+
+hr {
+    width: 100%;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+}
