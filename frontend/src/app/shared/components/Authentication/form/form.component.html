@@ -5,14 +5,12 @@
     <h1>{{formType}}</h1>
 
     <form (ngSubmit)="authenticationRequest()">
-        <label for="username">Username:</label>
-        <input type="text" name="username" maxlength="20" autocomplete="off" [(ngModel)]="username" (input)="error=''">
+        
+        <input type="text" placeholder="Username" name="username" maxlength="20" autocomplete="off" [(ngModel)]="username" (input)="error=''">
 
-        <label for="password">Password:</label>
-        <input type="password" name="password" maxlength="30" [(ngModel)]="password" (input)="error=''">
+        <input type="password" placeholder="Password" name="password" maxlength="30" [(ngModel)]="password" (input)="error=''">
 
-        <label for="confirm-password" *ngIf="formType == 'Sign up'">Confirm password:</label>
-        <input type="password" name="confirm-password" maxlength="30" *ngIf="formType == 'Sign up'" [(ngModel)]="confirm_password" (input)="error=''">
+        <input type="password" placeholder="Confirm password" name="confirm-password" maxlength="30" *ngIf="formType == 'Sign up'" [(ngModel)]="confirm_password" (input)="error=''">
 
         <p class="error">{{error}}</p>
 

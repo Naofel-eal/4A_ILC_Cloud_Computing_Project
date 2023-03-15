@@ -1,13 +1,3 @@
-.blur {
-    z-index: -500;
-    backdrop-filter: blur(10px);
-    position: fixed;
-    top: 0;
-    left: 0; 
-    height: 100vh;
-    width: 100vw;
-}
-
 .bg {
     z-index: -1000;
     position: fixed;
