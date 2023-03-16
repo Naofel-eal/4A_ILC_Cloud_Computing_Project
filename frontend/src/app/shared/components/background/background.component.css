@@ -1,13 +1,29 @@
-.bg {
+.container {
     z-index: -1000;
     position: fixed;
     top: 0;
-    left: 0; 
-    height: 100vh;
+    left: 0;
     width: 100vw;
-    background: url("/assets/background.png") no-repeat;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.sliding-background {
+    background: url("/assets/background.png") repeat-y;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
-    background-size: cover;
+    background-size: cover;    -webkit-animation: bgScroll 8000s linear infinite;
+    animation: bgScroll 8000s linear infinite;
+    height: 100%;
+    position: relative;
+}
+
+@keyframes bgScroll{  
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 10000%;
+    }
 }

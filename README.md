@@ -9,6 +9,11 @@
 **[COUTAREL Allan](https://github.com/a-coutarel)**
 
 ## Description
+Bula is little social network inspired by Twitter. 
+
+In Bula, you can post bula, meow a bula (like) and rebula (rt a bula).
+
+You will need to create an account to access the app.
 
 ## Made with
 
@@ -21,5 +26,3 @@
 ![](https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white)
 
 ## Installation
-
-## Features
