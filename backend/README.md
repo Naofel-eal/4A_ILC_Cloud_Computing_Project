@@ -8,9 +8,10 @@
 ```bash
 pip install redis
 pip install Flask
+pip install -U flask-cors
 export FLASK_APP=main.py
 export FLASK_ENV=development
-flask run
+flask run -p 8888
 ```
 
 ```bash
@@ -24,7 +25,7 @@ docker run --name redis-bula -p 6379:6379 redis
 ## Sign Up
 Route to sign up.
 ```http
-  GET /register
+  GET /user/register
 ```
 
 **Form Body :**
@@ -33,12 +34,15 @@ Route to sign up.
 | `username`| `string` | **Required**. Name of the user.     |
 | `password`| `string` | **Required**. Password of the user. |
 
+**Return :**
+User's token.
+
 <br>
 
 ## Sign In
 Route to sign in.
 ```http
-  GET /login
+  GET /user/login
 ```
 
 **Form Body :**
@@ -55,7 +59,7 @@ User's token.
 ## Get all bulas
 Route to get all bulas of the application.
 ```http
-  GET /all-bulas
+  GET /bula/all-bulas
 ```
 
 **Header :**
@@ -68,11 +72,12 @@ Route to get all bulas of the application.
   {
     'bulas': [
       {
-        'date': {date format "%d/%m/%Y %H:%M:%S"},
         'author': {userId of the author of the bula},
-        'text': {text of the bula},
+        'date': {date format "%d/%m/%Y %H:%M:%S"},
+        'id': {id of the bula},
         'meows': [{userId}, ...],
-        'rebulas': [{userId}, ...]
+        'rebulas': [{userId}, ...],
+        'text': {text of the bula}
       },
       ...
     ]
@@ -84,7 +89,42 @@ Route to get all bulas of the application.
 ## Get all bulas of a user
 Route to get all bulas of a specified user.
 ```http
-  GET /user-bulas
+  GET /bula/user-bulas
+```
+
+**Header :**
+| Parameter       | Type     | Description                       |
+| :--------       | :------- | :-------------------------------- |
+| `Authorization` | `string` | **Required**. User's token        |
+
+**URL Arguments :**
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `userId`  | `string` | **Required**. Id of the user.     |
+
+**Return :**
+```python
+  {
+    'bulas': [
+      {
+        'author': {userId of the author of the bula},
+        'date': {date format "%d/%m/%Y %H:%M:%S"},
+        'id': {id of the bula},
+        'meows': [{userId}, ...],
+        'rebulas': [{userId}, ...],
+        'text': {text of the bula}
+      },
+      ...
+    ]
+  }
+```
+
+<br>
+
+## Post a bula
+Route to post a bula.
+```http
+  POST /bula/post-bula
 ```
 
 **Header :**
@@ -95,30 +135,14 @@ Route to get all bulas of a specified user.
 **Form Body :**
 | Parameter | Type     | Description                       |
 | :-------- | :------- | :-------------------------------- |
-| `userId`  | `string` | **Required**. Id of the user.     |
-
-**Return :**
-```python
-  {
-    'bulas': [
-      {
-        'date': {date format "%d/%m/%Y %H:%M:%S"},
-        'author': {userId of the author of the bula},
-        'text': {text of the bula},
-        'meows': [{userId}, ...],
-        'rebulas': [{userId}, ...]
-      },
-      ...
-    ]
-  }
-```
+| `text`    | `string` | **Required**. Text of the bula.     |
 
 <br>
 
 ## Get all hashtags
 Route to get all hashtags of the application.
 ```http
-  GET /all-hashtags
+  GET /bula/all-hashtags
 ```
 
 **Header :**
@@ -130,8 +154,102 @@ Route to get all hashtags of the application.
 ```python
   {
     'hashtags': [
-      {hashtag}, 
+      {
+        'hashtag': {topic},
+        'number': {number of appearances of the topic}
+      }, 
       ...
     ]
   }
+```
+
+<br>
+
+## Get all bulas of a topic
+Route to get all bulas of a specified topic.
+```http
+  GET /bula/hashtag
+```
+
+**Header :**
+| Parameter       | Type     | Description                       |
+| :--------       | :------- | :-------------------------------- |
+| `Authorization` | `string` | **Required**. User's token        |
+
+**URL Arguments :**
+| Parameter  | Type     | Description                       |
+| :--------  | :------- | :-------------------------------- |
+| `hashtagId`| `string` | **Required**. Id of the topic.    |
+
+**Return :**
+```python
+  {
+    'bulas': [
+      {
+        'author': {userId of the author of the bula},
+        'date': {date format "%d/%m/%Y %H:%M:%S"},
+        'id': {id of the bula},
+        'meows': [{userId}, ...],
+        'rebulas': [{userId}, ...],
+        'text': {text of the bula}
+      },
+      ...
+    ]
+  }
+```
+
+<br>
+
+## Search
+Route to get all content that match with the content.
+```http
+  GET /bula/research
+```
+
+**Header :**
+| Parameter       | Type     | Description                       |
+| :--------       | :------- | :-------------------------------- |
+| `Authorization` | `string` | **Required**. User's token        |
+
+**URL Arguments :**
+| Parameter  | Type     | Description                       |
+| :--------  | :------- | :-------------------------------- |
+| `text`     | `string` | **Required**. Researched text     |
+
+**Return :**
+```python
+  {
+    'bulas': [
+      {
+        'author': {userId of the author of the bula},
+        'date': {date format "%d/%m/%Y %H:%M:%S"},
+        'id': {id of the bula},
+        'meows': [{userId}, ...],
+        'rebulas': [{userId}, ...],
+        'text': {text of the bula}
+      },
+      ...
+    ],
+    'users': [
+      { first userId },
+      { second userId },
+      ...
+    ]
+  }
+```
+
+<br>
+
+## Load data
+Route to load saved data (for simulation).
+```http
+  POST /load
+```
+
+<br>
+
+## Reset all data
+Route to clear all databases.
+```http
+  POST /bula/hashtag
 ```
