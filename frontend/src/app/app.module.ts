@@ -23,6 +23,7 @@ import { TopicsComponent } from './shared/components/navbar/topics/topics.compon
 import { BulaPanelComponent } from './shared/components/bula/bula.panel/bula.panel.component';
 import { TopicPageComponent } from './topic-page/topic-page.component';
 import { ResearchComponent } from './research/research.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { ResearchComponent } from './research/research.component';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    AutosizeModule
+    AutosizeModule,
+    BrowserAnimationsModule
   ],
   providers: [AuthGuard, {
     provide: HTTP_INTERCEPTORS,

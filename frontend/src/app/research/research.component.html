@@ -2,7 +2,12 @@
     <app-navbar></app-navbar>
     <div class="content">
         <h1>Research</h1>
-        <input type="text" class="searchBox" placeholder="Searched text..." (input)="onTextChanged($event)">
+        <input 
+            type="text" 
+            class="searchBox" 
+            placeholder="Searched text..." 
+            (input)="onTextChanged($event)" 
+            autofocus>
     </div>
     <div class="result">
         <h2 *ngIf="users.length == 0 && bulas.length == 0">No results</h2>
@@ -23,11 +28,8 @@
             <h2>BULAS</h2>
             <hr>
             <ul>
-                <li>
-                    <app-bula
-                        *ngFor="let bula of bulas"
-                        [bula]="bula"
-                    ></app-bula>
+                <li *ngFor="let bula of bulas">
+                    <app-bula [bula]="bula"></app-bula>
                 </li>
             </ul>
         </div>
