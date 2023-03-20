@@ -14,7 +14,6 @@ import { FormComponent } from './shared/components/Authentication/form/form.comp
 import { BackgroundComponent } from './shared/components/background/background.component';
 import { TrendComponent } from './home/trend/trend.component';
 import { BulaContentFormatterDirective } from './shared/directives/bula-content-formatter.directive';
-import { BulasCarouselComponent } from './shared/components/bulas-carousel/bulas-carousel.component';
 import { CreateBulaComponent } from './shared/components/navbar/create-bula/create-bula.component';
 import {AutosizeModule} from 'ngx-autosize';
 import { RequestInterceptor } from './interceptors/request.interceptor';
@@ -23,6 +22,7 @@ import { TopicsComponent } from './shared/components/navbar/topics/topics.compon
 import { BulaPanelComponent } from './shared/components/bula/bula.panel/bula.panel.component';
 import { TopicPageComponent } from './topic-page/topic-page.component';
 import { ResearchComponent } from './research/research.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -37,7 +37,6 @@ import { ResearchComponent } from './research/research.component';
     BackgroundComponent,
     TrendComponent,
     BulaContentFormatterDirective,
-    BulasCarouselComponent,
     CreateBulaComponent,
     TopicsComponent,
     BulaPanelComponent,
@@ -49,7 +48,8 @@ import { ResearchComponent } from './research/research.component';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    AutosizeModule
+    AutosizeModule,
+    BrowserAnimationsModule
   ],
   providers: [AuthGuard, {
     provide: HTTP_INTERCEPTORS,

@@ -10,12 +10,12 @@ import { ResearchComponent } from './research/research.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'home', title: "Bula - Home", component: HomeComponent, canActivate: [AuthGuard] },
-  { path: 'register', title: "Bula - Sign up", component: RegisterComponent, canActivate: [AuthGuard] },
-  { path: 'login', title: "Bula - Sign in", component: LoginComponent, canActivate: [AuthGuard] },
-  { path: 'profile/:userId', component: ProfileComponent, canActivate: [AuthGuard] },
-  { path: 'topic/:hashtag', component: TopicPageComponent, canActivate: [AuthGuard] },
-  { path: 'research', component: ResearchComponent, canActivate: [AuthGuard] }
+  { path: 'home', title: "Bula - Home", component: HomeComponent, canActivate: [AuthGuard]},
+  { path: 'register', title: "Bula - Sign up", component: RegisterComponent, canActivate: [AuthGuard]},
+  { path: 'login', title: "Bula - Sign in", component: LoginComponent, canActivate: [AuthGuard]},
+  { path: 'profile/:userId', component: ProfileComponent, canActivate: [AuthGuard]},
+  { path: 'topic/:hashtag', component: TopicPageComponent, canActivate: [AuthGuard]},
+  { path: 'research', component: ResearchComponent, canActivate: [AuthGuard]},
 ];
 
 @NgModule({
