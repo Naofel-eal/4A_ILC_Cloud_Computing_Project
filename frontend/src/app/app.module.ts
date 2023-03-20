@@ -14,7 +14,6 @@ import { FormComponent } from './shared/components/Authentication/form/form.comp
 import { BackgroundComponent } from './shared/components/background/background.component';
 import { TrendComponent } from './home/trend/trend.component';
 import { BulaContentFormatterDirective } from './shared/directives/bula-content-formatter.directive';
-import { BulasCarouselComponent } from './shared/components/bulas-carousel/bulas-carousel.component';
 import { CreateBulaComponent } from './shared/components/navbar/create-bula/create-bula.component';
 import {AutosizeModule} from 'ngx-autosize';
 import { RequestInterceptor } from './interceptors/request.interceptor';
@@ -38,7 +37,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BackgroundComponent,
     TrendComponent,
     BulaContentFormatterDirective,
-    BulasCarouselComponent,
     CreateBulaComponent,
     TopicsComponent,
     BulaPanelComponent,
