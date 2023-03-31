@@ -4,23 +4,38 @@
 </h1>
 
 # Installation
+Use the dockerfile to build docker images and start the application on docker containers.
 
+API :
 ```bash
-pip install redis
-pip install Flask
-pip install -U flask-cors
-export FLASK_APP=main.py
-export FLASK_ENV=development
-flask run -p 8888
+docker build -t api_bula .
+docker run -p 8888:8888 api_bula
 ```
+⚠️ The API needs to run on port 8888.
 
+REDIS DATABASE :
 ```bash
-sudo apt-get update
-sudo apt-get install redis
 docker run --name redis-bula -p 6379:6379 redis
 ```
 
+# Important
+To load data on the application, please use the **load route** :
+```http
+curl -X POST http://localhost:8888/load
+```
+
 # API Reference
+
+## Healtz
+Test route.
+```http
+  /healthz
+```
+
+**Return :**
+Success code 200.
+
+<br>
 
 ## Sign Up
 Route to sign up.

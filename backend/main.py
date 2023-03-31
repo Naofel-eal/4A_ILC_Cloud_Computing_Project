@@ -25,11 +25,9 @@ def acceptCORS(response):
     response.headers.add('Access-Control-Allow-Headers', '*')
     return response
 
-@app.route('/')
-def default():
-    if request.method == 'GET':
-        return '''<h1>Bula API v0.0.0</h1>'''
-    abort(400)
+@app.route('/healthz')
+def healthz():
+    return Response(status=200)
     
 
 @app.route('/bula/all-bulas', methods=['GET'])
