@@ -2,7 +2,7 @@ from flask import Flask, Response, request, abort
 from services.user_service import UserService
 from services.bula_service import BulaService
 from services.redis_service import RedisService
-from flask_cors import CORS, cross_origin
+from flask_cors import CORS
 import sys
 
 app = Flask(__name__)
