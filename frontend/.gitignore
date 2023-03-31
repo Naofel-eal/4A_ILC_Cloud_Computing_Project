@@ -1,5 +1,4 @@
 # Compiled output
-/dist
 /tmp
 /out-tsc
 /bazel-out
@@ -34,6 +33,7 @@ yarn-error.log
 /libpeerconnection.log
 testem.log
 /typings
+/.gitignore
 
 # System files
 .DS_Store
