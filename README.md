@@ -26,3 +26,7 @@ You will need to create an account to access the app.
 ![](https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white)
 
 ## Installation
+
+You can find installation details in the backend and frontend folders.
+
+Please follow all the steps for both backend and frontend installations.
