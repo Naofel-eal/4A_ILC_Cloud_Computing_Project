@@ -24,6 +24,8 @@ To load data on the application, please use the **load route** :
 curl -X POST http://localhost:8888/load
 ```
 
+If you want to run the API locally, you need to change the host ***gateway.docker.internal*** of the redis databases in bula_service.py (lines 9 and 10) and user_service.py (lines 12 and 13) to ***127.0.0.1***.
+
 # API Reference
 
 ## Healtz

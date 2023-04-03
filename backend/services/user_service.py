@@ -9,8 +9,8 @@ from utils.utils import Utils
 from flask import abort
 
 class UserService:
-    usersDB = redis.Redis(host="127.0.0.1", port=6379, db=2, decode_responses=True)
-    tokensDB = redis.Redis(host="127.0.0.1", port=6379, db=3, decode_responses=True)
+    usersDB = redis.Redis(host="gateway.docker.internal", port=6379, db=2, decode_responses=True)
+    tokensDB = redis.Redis(host="gateway.docker.internal", port=6379, db=3, decode_responses=True)
 
     def register(username: str, password: str) -> str:
         if UserService.usersDB.exists(username):

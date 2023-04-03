@@ -6,8 +6,8 @@ from .user_service import UserService
 from utils.utils import Utils
 
 class BulaService:
-    bulasDB = redis.Redis(host="127.0.0.1", port=6379, db=0, decode_responses=True)
-    hashtagDB = redis.Redis(host="127.0.0.1", port=6379, db=1, decode_responses=True)
+    bulasDB = redis.Redis(host="gateway.docker.internal", port=6379, db=0, decode_responses=True)
+    hashtagDB = redis.Redis(host="gateway.docker.internal", port=6379, db=1, decode_responses=True)
 
     def getAllBulas()-> dict:
         bulasDictionary: dict = {"bulas" : []}
