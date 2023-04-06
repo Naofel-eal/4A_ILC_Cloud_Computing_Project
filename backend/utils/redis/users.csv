@@ -1,2 +1,8 @@
-pessi2012;{"password": "pleuresansmiauler", "bulas": ["480b89d0-b553-11ed-94cb-00155d93e0cd", "460419a2-b555-11ed-b3c6-00155d93e0cd", "46c72262-b555-11ed-ad76-00155d93e0cd", "4798b700-b555-11ed-85a2-00155d93e0cd"]}
-zizoulevrai;{"password": "zizoucdm98", "bulas": ["4798b700-b555-11ed-85a2-00155d93e0cd"]}
+alice;{"password": "mdp123", "bulas": ["480b89d0-b553-11ed-94cb-00155d93e0cd"]}
+bob;{"password": "bobpass", "bulas": ["1f2e68e0-b553-11ed-94cb-00155d93e0cd", "480b89d0-b553-11ed-94cb-00155d93e0cd"]}
+charlie;{"password": "p@ssword", "bulas": []}
+david;{"password": "secret123", "bulas": ["480b89d0-b553-11ed-94cb-00155d93e0cd", "eaaf8960-b553-11ed-94cb-00155d93e0cd"]}
+emily;{"password": "123456", "bulas": ["eaaf8960-b553-11ed-94cb-00155d93e0cd", "1f2e68e0-b553-11ed-94cb-00155d93e0cd", "b1f7c3f0-b553-11ed-94cb-00155d93e0cd"]}
+john;{"password": "johndoe123", "bulas": ["547b5v80-b553-11ed-94cb-00155d93e0cd"]}
+jane;{"password": "janedoe456", "bulas": ["dlk589f0-b553-11ed-94cb-00155d93e0cd", "ldk58zs0-b553-11ed-94cb-00155d93e0cd"]}
+bobbrown;{"password": "bobbrown789", "bulas": ["ldk58zs0-b553-11ed-94cb-00155d93e0cd", "dlk589f0-b553-11ed-94cb-00155d93e0cd"]}
