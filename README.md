@@ -30,3 +30,15 @@ You will need to create an account to access the app.
 You can find installation details in the backend and frontend folders.
 
 Please follow all the steps for both backend and frontend installations.
+
+## Preview
+
+![Home page](/preview/home.png)
+
+![Profile page](/preview/profile.png)
+
+![Research page](/preview/research.png)
+
+![Sign up page](/preview/signup.png)
+
+![Sign in page](/preview/signin.png)
