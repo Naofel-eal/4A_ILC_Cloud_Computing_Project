@@ -31,6 +31,10 @@ You can find installation details in the backend and frontend folders.
 
 Please follow all the steps for both backend and frontend installations.
 
+## Badges 
+
+[![Build App](https://github.com/Naofel-eal/4A_ILC_Cloud_Computing_Project/actions/workflows/build.yml/badge.svg)](https://github.com/Naofel-eal/4A_ILC_Cloud_Computing_Project/actions/workflows/build.yml)
+
 ## Preview
 
 ![Home page](/preview/home.png)
