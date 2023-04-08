@@ -13,7 +13,7 @@ def beforeRequest():
     if request.method == 'OPTIONS':
         return Response(status=200)
     
-    if request.path not in ['/', '/user/login', '/user/register', '/load', '/reset']:
+    if request.path not in ['/healthz', '/user/login', '/user/register', '/load', '/reset']:
         if request.headers.get('Authorization') == None:
             abort(400)
         else:
