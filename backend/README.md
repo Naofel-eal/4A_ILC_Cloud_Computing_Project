@@ -60,7 +60,7 @@ Success code 200.
 ## Sign Up
 Route to sign up.
 ```http
-  GET /user/register
+  POST /user/register
 ```
 
 **Form Body :**
@@ -77,7 +77,7 @@ User's token.
 ## Sign In
 Route to sign in.
 ```http
-  GET /user/login
+  POST /user/login
 ```
 
 **Form Body :**
